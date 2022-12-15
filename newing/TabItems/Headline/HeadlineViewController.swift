@@ -65,6 +65,23 @@ extension HeadlineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let articleVC = self.storyboard?.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController else { return }
+        
+        let article = articles[indexPath.row]
+        articleVC.urlStr = article.url!
+        articleVC.articleTitle = article.title!
+        articleVC.source = (article.source?.name)!
+        
+        //date 형식에 맞춰 자르기
+        var date = article.publishedAt
+        let endIdx: String.Index = date!.index(date!.startIndex, offsetBy: 9)
+        date = String(date![...endIdx])
+        articleVC.date = date!
+        
+        // 전환된 화면이 보여지는 방법 설정 (fullScreen)
+        articleVC.modalPresentationStyle = .fullScreen
+        self.present(articleVC, animated: false, completion: nil)
     }
    
 }

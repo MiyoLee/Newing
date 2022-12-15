@@ -1,5 +1,8 @@
 ${PODS_ROOT}/Target Support Files/Pods-newing/Pods-newing-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/AlamofireRSSParser/AlamofireRSSParser.framework
+${BUILT_PRODUCTS_DIR}/Ji/Ji.framework
 ${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
+${BUILT_PRODUCTS_DIR}/ReadabilityKit/ReadabilityKit.framework
 ${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework
+${BUILT_PRODUCTS_DIR}/Untagger/Untagger.framework

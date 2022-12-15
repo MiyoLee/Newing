@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftSoup
 
 class SearchTableViewCell: UITableViewCell {
 

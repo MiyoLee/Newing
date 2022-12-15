@@ -10,6 +10,8 @@ pod 'Alamofire'
 pod 'Kingfisher'
 pod 'SwiftSoup'
 pod 'AlamofireRSSParser'
+pod 'ReadabilityKit'
+pod 'Untagger'
  
  # Pods for SignInWithGoogle_Example
 

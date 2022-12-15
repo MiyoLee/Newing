@@ -11,6 +11,7 @@ class BaseViewController: UIViewController {
     
     var IvLogo = UIImageView(image:UIImage(named: "newing_logo"))
     var btnProfile = UIButton()
+    var btnBack = UIButton()
     
     override func viewDidLoad() {
         
@@ -49,9 +50,21 @@ class BaseViewController: UIViewController {
         btnProfile.heightAnchor.constraint(equalToConstant: 40).isActive = true
         btnProfile.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         btnProfile.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 100).isActive = true
-        // 클릭 이벤트
-        btnProfile.addTarget(self, action: Selector("btnClicked:"), for: .touchUpInside)
         
+        
+    }
+    
+    func addBtnBack() {
+        self.view.addSubview(btnBack)
+        
+        btnBack.setTitle("", for: .normal)
+        btnBack.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
+        btnBack.tintColor = UIColor.black
+        btnBack.translatesAutoresizingMaskIntoConstraints = false
+        btnBack.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        btnBack.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        //클릭 이벤트
+        btnBack.addTarget(self, action: "btnBackClicked:", for: .touchUpInside)
     }
     
     func addBtnPlus() {
@@ -75,12 +88,12 @@ class BaseViewController: UIViewController {
         btnPlus.translatesAutoresizingMaskIntoConstraints = false //contraint를 주기 위해서 false로 설정
         btnPlus.widthAnchor.constraint(equalToConstant: 50).isActive = true
         btnPlus.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        btnPlus.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -110).isActive = true
+        btnPlus.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
         btnPlus.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         
     }
     
-    func btnClicked(_ sender: UIButton?) {
+    @IBAction func btnClicked(_ sender: UIButton?) {
         
 //        if sender === btnProfile {
 //            //LoginViewController로 이동
@@ -95,3 +108,4 @@ class BaseViewController: UIViewController {
     }
     
 }
+

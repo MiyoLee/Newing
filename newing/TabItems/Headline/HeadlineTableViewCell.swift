@@ -24,10 +24,11 @@ class HeadlineTableViewCell: UITableViewCell {
     }
     
     func setup(title: String?, urlToImage: String?, source: String?, date: String?){
+        loadImage(url: urlToImage)
+        
         ivImage.layer.cornerRadius = ivImage.frame.width/8
         ivImage.clipsToBounds = true
         
-        loadImage(url: urlToImage)
         lbTitle.text = title
         lbSource.text = source
         lbDate.text = date

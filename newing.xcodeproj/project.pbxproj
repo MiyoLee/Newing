@@ -23,6 +23,7 @@
 		D3C54C4F28F2F0B000F25164 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C54C4E28F2F0B000F25164 /* BaseViewController.swift */; };
 		D3C54C5128F3DA8100F25164 /* XmlParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C54C5028F3DA8100F25164 /* XmlParserManager.swift */; };
 		D3C54C5528F3E6DB00F25164 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C54C5428F3E6DB00F25164 /* SearchTableViewCell.swift */; };
+		D3D44B96294715EF00AEC435 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D44B95294715EF00AEC435 /* ArticleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		D3C54C4E28F2F0B000F25164 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D3C54C5028F3DA8100F25164 /* XmlParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlParserManager.swift; sourceTree = "<group>"; };
 		D3C54C5428F3E6DB00F25164 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		D3D44B95294715EF00AEC435 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				D3C54C4728F2BCFB00F25164 /* Favorite */,
 				D3C54C4628F2BCEA00F25164 /* Search */,
 				D3C54C4528F2BCE000F25164 /* Headline */,
+				D3D44B95294715EF00AEC435 /* ArticleViewController.swift */,
 			);
 			path = TabItems;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				D3C54C5128F3DA8100F25164 /* XmlParserManager.swift in Sources */,
 				D3C54C4B28F2D9FC00F25164 /* Extension.swift in Sources */,
 				D31B723128EC273900407D82 /* AppDelegate.swift in Sources */,
+				D3D44B96294715EF00AEC435 /* ArticleViewController.swift in Sources */,
 				D3C54C4928F2BD6500F25164 /* HeadlineTableViewCell.swift in Sources */,
 				D3C54C4F28F2F0B000F25164 /* BaseViewController.swift in Sources */,
 				D31B723328EC273900407D82 /* SceneDelegate.swift in Sources */,

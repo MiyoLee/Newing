@@ -2,28 +2,40 @@ PODS:
   - Alamofire (5.6.2)
   - AlamofireRSSParser (4.0.0):
     - Alamofire (~> 5.5)
+  - Ji (5.0.0)
   - Kingfisher (7.4.1)
+  - ReadabilityKit (0.7.4):
+    - Ji (= 5.0.0)
   - SwiftSoup (2.4.3)
+  - Untagger (0.0.4)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireRSSParser
   - Kingfisher
+  - ReadabilityKit
   - SwiftSoup
+  - Untagger
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireRSSParser
+    - Ji
     - Kingfisher
+    - ReadabilityKit
     - SwiftSoup
+    - Untagger
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   AlamofireRSSParser: c8aeb615ac194d45e6648c121bbb442d16aaa4dc
+  Ji: d795fed288fe78658b404c88946d753b17d8d7f4
   Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
+  ReadabilityKit: 09e8b2ecb3d06f17f4c856e426c34f9016e86e6f
   SwiftSoup: 3384f2e618cfc1b3cbc7852c16692fe8de13fb8f
+  Untagger: 37cd7483949e7abe21630bda4474013fc0d8174f
 
-PODFILE CHECKSUM: 679a0cdc0672694664a6013a885e350b17bc62f2
+PODFILE CHECKSUM: 301bd833e3c828811256510260aaa46dff4d744c
 
 COCOAPODS: 1.11.3

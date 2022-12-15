@@ -23,7 +23,7 @@ class SearchViewController: BaseViewController {
         super.viewDidLoad()
         addHeader()
     }
-
+    
     func loadData(){
         if let keyword = tfSearch.text{
             let encryptedKeyword = keyword.replacingOccurrences(of: " ", with: "%20")
@@ -34,23 +34,23 @@ class SearchViewController: BaseViewController {
     }
     
     func loadRss(_ url: URL){
-//        // XmlParserManager instance/object/variable.
-//        let myParser : XmlParserManager = XmlParserManager().initWithURL(data) as! XmlParserManager
-//
-//        // Put feed in array.
-//        rssFeed = myParser.feeds
-//        tvSearch.reloadData()
-
-//        AF.request(url).responseRSS() { (response) -> Void in
-//            if let feed: RSSFeed = response.value {
-//                // Do something with your new RSSFeed object!
-//                self.articles = feed.items
-//                for item in feed.items {
-//                    print(item)
-//                }
-//                self.tvSearch.reloadData()
-//            }
-//        }
+        //        // XmlParserManager instance/object/variable.
+        //        let myParser : XmlParserManager = XmlParserManager().initWithURL(data) as! XmlParserManager
+        //
+        //        // Put feed in array.
+        //        rssFeed = myParser.feeds
+        //        tvSearch.reloadData()
+        
+        //        AF.request(url).responseRSS() { (response) -> Void in
+        //            if let feed: RSSFeed = response.value {
+        //                // Do something with your new RSSFeed object!
+        //                self.articles = feed.items
+        //                for item in feed.items {
+        //                    print(item)
+        //                }
+        //                self.tvSearch.reloadData()
+        //            }
+        //        }
         
         // Swift concurrency example.
         if #available(iOS 13.0, *) {
@@ -66,7 +66,7 @@ class SearchViewController: BaseViewController {
         }
     }
     
-
+    
     @available(iOS 13, *)
     func swiftConcurrencyFetch(_ url: URL) async -> RSSFeed? {
         let rss = await AF.request(url).serializingRSS().response.value
@@ -95,7 +95,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         let title = item.title
         let link = item.link
         let source = item.source
-    
+        
         //date to string
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -108,6 +108,23 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let articleVC = self.storyboard?.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController else { return }
+        
+        let article = articles[indexPath.row]
+        articleVC.urlStr = article.link!
+        articleVC.articleTitle = article.title!
+        articleVC.source = article.source!
+        
+        //date to string
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.string(from: article.pubDate!)
+        articleVC.date = date
+        
+        // 전환된 화면이 보여지는 방법 설정 (fullScreen)
+        articleVC.modalPresentationStyle = .fullScreen
+        self.present(articleVC, animated: false, completion: nil)
     }
 }
 
