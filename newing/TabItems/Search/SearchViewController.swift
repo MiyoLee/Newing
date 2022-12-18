@@ -21,7 +21,7 @@ class SearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addHeader()
+        addHeader(type: 1)
     }
     
     func loadData(){
@@ -57,10 +57,12 @@ class SearchViewController: BaseViewController {
             Task.init {
                 if let rss = await self.swiftConcurrencyFetch(url) {
                     print(rss)
-                    self.articles = rss.items
-                    self.tvSearch.reloadData()
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    self.tvSearch.scrollToRow(at: indexPath, at: .top, animated: true)
+                    if !rss.items.isEmpty {
+                        self.articles = rss.items
+                        self.tvSearch.reloadData()
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        self.tvSearch.scrollToRow(at: indexPath, at: .top, animated: true)
+                    }
                 }
             }
         }

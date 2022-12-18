@@ -9,9 +9,11 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
+    var viewHeader: UIView = UIView(frame: CGRect(x: 0, y: 30, width:0, height:60))
     var IvLogo = UIImageView(image:UIImage(named: "newing_logo"))
     var btnProfile = UIButton()
     var btnBack = UIButton()
+    var btnGoLink = UIButton()
     
     override func viewDidLoad() {
         
@@ -19,52 +21,79 @@ class BaseViewController: UIViewController {
         
     }
     
-    func addHeader() {
-        
-        let viewHeader: UIView = UIView(frame: CGRect(x: 0, y: 30, width:self.view.bounds.size.width, height:60))
+    func addHeader(type: Int) {
+        viewHeader.frame.size.width = view.bounds.size.width    //너비 설정
         viewHeader.backgroundColor = UIColor(rgb: 0xD2DAFF)
         self.view.addSubview(viewHeader)
         
-        addHeaderItems(view: viewHeader)
-        
+        addHeaderItems(view: viewHeader, type: type)
     }
     
-    func addHeaderItems(view: UIView){
-
-        //로고 추가
-        view.addSubview(IvLogo)
+    func addHeaderItems(view: UIView, type: Int){
+        switch type {
+        case 1:
+            //탭 메인. 로고, 프로필
+            addLogo()
+            addProfile()
+            
+        case 2:
+            // 뉴스 상세페이지. 뒤로가기, go link
+            addBtnBack()
+            addBtnGoLink()
+            
+        default:
+            print("default")
+        }
+     
+    }
+    
+    func addLogo() {
+        viewHeader.addSubview(IvLogo)
         IvLogo.translatesAutoresizingMaskIntoConstraints = false //contraint를 주기 위해서 false로 설정
-        IvLogo.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        IvLogo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        IvLogo.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        IvLogo.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        //프로필 버튼 추가
-        view.addSubview(btnProfile)
+        IvLogo.centerYAnchor.constraint(equalTo: viewHeader.centerYAnchor).isActive = true
+        IvLogo.leadingAnchor.constraint(equalTo: viewHeader.leadingAnchor, constant: 10).isActive = true
+        IvLogo.heightAnchor.constraint(equalTo: viewHeader.heightAnchor).isActive = true
+        IvLogo.widthAnchor.constraint(equalTo: viewHeader.heightAnchor).isActive = true
+    }
+    
+    func addProfile() {
+        viewHeader.addSubview(btnProfile)
         //set image
         btnProfile.setImage(UIImage(systemName: "person.circle"), for: .normal)
         btnProfile.tintColor = .darkGray
         //constraint
         btnProfile.translatesAutoresizingMaskIntoConstraints = false //contraint를 주기 위해서 false로 설정
-        btnProfile.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        btnProfile.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        btnProfile.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        btnProfile.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        btnProfile.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 100).isActive = true
-        
-        
+        btnProfile.centerYAnchor.constraint(equalTo: viewHeader.centerYAnchor).isActive = true
+        btnProfile.heightAnchor.constraint(equalTo: viewHeader.heightAnchor).isActive = true
+        btnProfile.trailingAnchor.constraint(equalTo: viewHeader.trailingAnchor, constant: -20).isActive = true
     }
     
     func addBtnBack() {
-        self.view.addSubview(btnBack)
+        viewHeader.addSubview(btnBack)
         
         btnBack.setTitle("", for: .normal)
         btnBack.setImage(UIImage(systemName: "arrow.backward"), for: .normal)
         btnBack.tintColor = UIColor.black
         btnBack.translatesAutoresizingMaskIntoConstraints = false
-        btnBack.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        btnBack.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        btnBack.centerYAnchor.constraint(equalTo: viewHeader.centerYAnchor).isActive = true
+        btnBack.leadingAnchor.constraint(equalTo: viewHeader.leadingAnchor, constant: 10).isActive = true
+        btnBack.heightAnchor.constraint(equalTo: viewHeader.heightAnchor).isActive = true
+        
         //클릭 이벤트
         btnBack.addTarget(self, action: "btnBackClicked:", for: .touchUpInside)
+    }
+    
+    func addBtnGoLink() {
+        viewHeader.addSubview(btnGoLink)
+        
+        btnGoLink.setTitle("Go Link", for: .normal)
+        btnGoLink.setTitleColor(UIColor.systemIndigo, for: .normal)
+        btnGoLink.translatesAutoresizingMaskIntoConstraints = false
+        btnGoLink.heightAnchor.constraint(equalTo: viewHeader.heightAnchor).isActive = true
+        btnGoLink.trailingAnchor.constraint(equalTo: viewHeader.trailingAnchor, constant: -10).isActive = true
+        
+        //클릭 이벤트
+        btnGoLink.addTarget(self, action: "btnGoLinkClicked:", for: .touchUpInside)
     }
     
     func addBtnPlus() {

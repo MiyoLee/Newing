@@ -17,6 +17,7 @@ class ArticleViewController: BaseViewController {
     @IBOutlet weak var lbDate: UILabel!
     @IBOutlet weak var ivImage: UIImageView!
     @IBOutlet weak var lbContent: UILabel!
+    @IBOutlet weak var viewContentWrapper: UIView!
     
     var urlStr: String = ""
     var articleTitle: String = ""
@@ -25,35 +26,48 @@ class ArticleViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addBtnBack()
-        addBtnPlus()
+        setup()
         loadArticle()
     }
     
+    func setup() {
+//        addBtnBack()
+//        addBtnGoLink()
+        addHeader(type: 2)
+        addBtnPlus()
+        viewContentWrapper.layer.cornerRadius = ivImage.frame.width/16
+        viewContentWrapper.clipsToBounds = true
+    }
+    
     func loadArticle() {
-        
-        //ReadabilityKit 사용
-        let articleUrl = URL(string: urlStr)!
-        Readability.parse(url: articleUrl, completion: { data in
-            let title = data?.title
-            //let description = data?.description
-            //let keywords = data?.keywords
-            let imageUrl = data?.topImage
-            //let videoUrl = data?.topVideo
-            let datePublished = data?.datePublished
+        if let articleUrl = URL(string: urlStr) {
+            //ReadabilityKit 사용. title, image, date 불러옴
+            Readability.parse(url: articleUrl, completion: { data in
+                let title = data?.title
+                //let description = data?.description
+                //let keywords = data?.keywords
+                let imageUrl = data?.topImage
+                //let videoUrl = data?.topVideo
+                let datePublished = data?.datePublished
+                
+                self.setDataExceptContent(title: title, imgUrl: imageUrl, date: datePublished)   //컨텐츠 제외한 데이터 화면에 뿌리기
+                
+            })
             
-            self.setDataExceptContent(title: title, imgUrl: imageUrl, date: datePublished)   //컨텐츠 제외한 데이터 화면에 뿌리기
-            
-        })
-        
-        //UntaggerManager 사용
-        UntaggerManager.sharedInstance.getText(url: articleUrl) { (title, body, source, error) in
-            if error == nil {
-                self.lbContent.text = body  //컨텐츠 set
-            }
-            
-            if let error = error {
-                print("Error: \(error.message)")
+            //UntaggerManager 사용. content 불러옴
+            UntaggerManager.sharedInstance.getText(url: articleUrl) { (title, body, source, error) in
+                if error == nil {
+                    //컨텐츠 set
+                    if let body = body, !body.isEmpty{
+                        self.lbContent.text = body
+                    } else {
+                        self.lbContent.text = "No content"
+                    }
+                }
+                
+                if let error = error {
+                    print("Error: \(error.message)")
+                }
             }
         }
     }
@@ -63,8 +77,6 @@ class ArticleViewController: BaseViewController {
         if let imgUrl {
             ivImage.load(urlString: imgUrl)
         }
-        ivImage.layer.cornerRadius = ivImage.frame.width/16
-        ivImage.clipsToBounds = true
         
         //타이틀, 날짜, 출처 세팅
         lbTitle.text = title
@@ -79,6 +91,13 @@ class ArticleViewController: BaseViewController {
     
     @IBAction func btnBackClicked(_ sender: UIButton?) {
         self.dismiss(animated: false, completion: nil)
+    }
+    
+    @IBAction func btnGoLinkClicked(_ sender: Any) {
+        if let articleUrl = URL(string: urlStr) {
+            UIApplication.shared.open(articleUrl)
+        }
+            
     }
     
 }

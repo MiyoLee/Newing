@@ -11,6 +11,6 @@ class FavoriteViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addHeader()
+        addHeader(type: 1)
     }
 }
