@@ -12,7 +12,7 @@
         <!--Search-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="searchViewController" id="BYZ-38-t0r" customClass="SearchViewController" customModule="newing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searchVC" id="BYZ-38-t0r" customClass="SearchViewController" customModule="newing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -267,7 +267,7 @@
         <!--Headline-->
         <scene sceneID="QgX-Eu-3KU">
             <objects>
-                <viewController storyboardIdentifier="headlineViewController" id="fWn-Ar-rTE" customClass="HeadlineViewController" customModule="newing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HeadlineVC" id="fWn-Ar-rTE" customClass="HeadlineViewController" customModule="newing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hW3-3S-FpB">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -357,6 +357,60 @@
             </objects>
             <point key="canvasLocation" x="426" y="-1026"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="6AI-Fa-jm6">
+            <objects>
+                <viewController storyboardIdentifier="LoginVC" id="Y2q-hf-heU" customClass="LoginViewController" customModule="newing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VOP-VF-VQx">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXC-ua-fU3" userLabel="btnBack">
+                                <rect key="frame" x="12" y="37" width="50" height="35"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.backward" catalog="system"/>
+                                <connections>
+                                    <action selector="btnBackTouched:" destination="Y2q-hf-heU" eventType="touchUpInside" id="hDa-8v-GdA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JT0-Iw-EEO" userLabel="btnGoogleSignIn" customClass="GIDSignInButton">
+                                <rect key="frame" x="127.66666666666669" y="411" width="135" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Google Sign In"/>
+                                <connections>
+                                    <action selector="btnGoogleSignInTouched:" destination="Y2q-hf-heU" eventType="touchUpInside" id="vAB-l2-5Ut"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ubw-xL-CRu" userLabel="btnSignOut">
+                                <rect key="frame" x="150" y="454" width="90" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Sign Out"/>
+                                <connections>
+                                    <action selector="btnSignOutTouched:" destination="Y2q-hf-heU" eventType="touchUpInside" id="rZM-2L-HkV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gZO-BD-5SG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ubw-xL-CRu" firstAttribute="top" secondItem="JT0-Iw-EEO" secondAttribute="bottom" constant="8" symbolic="YES" id="0b3-oV-HwA"/>
+                            <constraint firstItem="JT0-Iw-EEO" firstAttribute="centerY" secondItem="gZO-BD-5SG" secondAttribute="centerY" id="YC7-wX-2Dx"/>
+                            <constraint firstItem="gZO-BD-5SG" firstAttribute="top" secondItem="nXC-ua-fU3" secondAttribute="top" constant="10" id="YtB-Bc-OWF"/>
+                            <constraint firstItem="JT0-Iw-EEO" firstAttribute="centerX" secondItem="gZO-BD-5SG" secondAttribute="centerX" id="hEs-UT-tQR"/>
+                            <constraint firstItem="nXC-ua-fU3" firstAttribute="leading" secondItem="gZO-BD-5SG" secondAttribute="leading" constant="12" id="ssy-C3-1z6"/>
+                            <constraint firstItem="Ubw-xL-CRu" firstAttribute="centerX" secondItem="gZO-BD-5SG" secondAttribute="centerX" id="yXK-pa-hZH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnGoogleSignIn" destination="JT0-Iw-EEO" id="5HB-zi-NfA"/>
+                        <outlet property="btnSignOut" destination="Ubw-xL-CRu" id="Zl4-gx-b5J"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5mW-id-rux" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1366.1538461538462" y="-1094.0758293838862"/>
+        </scene>
         <!--Base View Controller-->
         <scene sceneID="QvM-BD-JDj">
             <objects>
@@ -389,7 +443,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="bff-Rh-MBd">
             <objects>
-                <tabBarController id="9Jd-Mk-8lJ" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="9Jd-Mk-8lJ" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aL0-cW-SwL">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -407,6 +461,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>

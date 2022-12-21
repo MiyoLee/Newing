@@ -44,7 +44,7 @@ class BaseViewController: UIViewController {
         default:
             print("default")
         }
-     
+        
     }
     
     func addLogo() {
@@ -57,15 +57,24 @@ class BaseViewController: UIViewController {
     }
     
     func addProfile() {
+        btnProfile.removeFromSuperview()
         viewHeader.addSubview(btnProfile)
+        if UserDefaults.standard.object(forKey: "emailAddress") != nil {    // 로그인 상태일 때
+            btnProfile.setTitle(UserDefaults.standard.string(forKey: "givenName"), for: .normal)
+        } else {    // 로그아웃 상태일 때
+            btnProfile.setTitle("Sign in", for: .normal)
+        }
         //set image
-        btnProfile.setImage(UIImage(systemName: "person.circle"), for: .normal)
-        btnProfile.tintColor = .darkGray
+//        btnProfile.setImage(UIImage(systemName: "person.circle"), for: .normal)
+//        btnProfile.tintColor = .darkGray
         //constraint
         btnProfile.translatesAutoresizingMaskIntoConstraints = false //contraint를 주기 위해서 false로 설정
         btnProfile.centerYAnchor.constraint(equalTo: viewHeader.centerYAnchor).isActive = true
         btnProfile.heightAnchor.constraint(equalTo: viewHeader.heightAnchor).isActive = true
         btnProfile.trailingAnchor.constraint(equalTo: viewHeader.trailingAnchor, constant: -20).isActive = true
+        
+        //클릭 이벤트
+        btnProfile.addTarget(self, action: "btnProfileClicked:", for: .touchUpInside)
     }
     
     func addBtnBack() {
@@ -122,17 +131,14 @@ class BaseViewController: UIViewController {
         
     }
     
-    @IBAction func btnClicked(_ sender: UIButton?) {
+    @IBAction func btnProfileClicked(_ sender: UIButton?) {
         
-//        if sender === btnProfile {
-//            //LoginViewController로 이동
-//            guard let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "loginViewControllerID") as? LoginViewController else { return }
-//
-//            loginViewController.modalTransitionStyle = .coverVertical
-//            loginViewController.modalPresentationStyle = .fullScreen
-//
-//            self.present(loginViewController, animated: true, completion: nil)
-//        }
+        //LoginViewController로 이동
+        guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController else { return }
+        
+        loginVC.modalPresentationStyle = .fullScreen
+        
+        self.present(loginVC, animated: false, completion: nil)
         
     }
     

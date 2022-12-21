@@ -6,13 +6,15 @@ target 'newing' do
   use_frameworks!
 
   # Pods for newing
+
 pod 'Alamofire'
 pod 'Kingfisher'
 pod 'SwiftSoup'
 pod 'AlamofireRSSParser'
 pod 'ReadabilityKit'
 pod 'Untagger'
- 
+pod 'GoogleSignIn'
+
  # Pods for SignInWithGoogle_Example
 
 
