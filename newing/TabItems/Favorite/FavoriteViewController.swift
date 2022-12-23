@@ -5,6 +5,7 @@
 //  Created by Miyo Lee on 2022/10/04.
 //
 
+import Foundation
 import UIKit
 
 class FavoriteViewController: BaseViewController {
@@ -13,4 +14,5 @@ class FavoriteViewController: BaseViewController {
         super.viewDidLoad()
         addHeader(type: 1)
     }
+    
 }

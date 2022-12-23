@@ -16,8 +16,10 @@
 		D31B723D28EC273A00407D82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D31B723B28EC273A00407D82 /* LaunchScreen.storyboard */; };
 		D31B724628EC2C9D00407D82 /* HeadlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B724528EC2C9D00407D82 /* HeadlineViewController.swift */; };
 		D31B724828EC2CB200407D82 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B724728EC2CB200407D82 /* FavoriteViewController.swift */; };
-		D3779EA728F695D900C2BFA4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3779EA628F695D800C2BFA4 /* GoogleService-Info.plist */; };
 		D3779EAA28F6973200C2BFA4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D3779EA928F6973200C2BFA4 /* FirebaseAnalytics */; };
+		D384AC1E29542C7B00FE1377 /* FirebasePractice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384AC1D29542C7B00FE1377 /* FirebasePractice.swift */; };
+		D384AC222954662F00FE1377 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3779EA628F695D800C2BFA4 /* GoogleService-Info.plist */; };
+		D384AC24295539B000FE1377 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384AC23295539B000FE1377 /* JoinViewController.swift */; };
 		D3C54C4928F2BD6500F25164 /* HeadlineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C54C4828F2BD6500F25164 /* HeadlineTableViewCell.swift */; };
 		D3C54C4B28F2D9FC00F25164 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C54C4A28F2D9FC00F25164 /* Extension.swift */; };
 		D3C54C4F28F2F0B000F25164 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C54C4E28F2F0B000F25164 /* BaseViewController.swift */; };
@@ -43,6 +45,8 @@
 		D31B724728EC2CB200407D82 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		D3779EA628F695D800C2BFA4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D384AC192951959100FE1377 /* newing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = newing.entitlements; sourceTree = "<group>"; };
+		D384AC1D29542C7B00FE1377 /* FirebasePractice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePractice.swift; sourceTree = "<group>"; usesTabs = 0; };
+		D384AC23295539B000FE1377 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		D3C54C4828F2BD6500F25164 /* HeadlineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlineTableViewCell.swift; sourceTree = "<group>"; };
 		D3C54C4A28F2D9FC00F25164 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		D3C54C4E28F2F0B000F25164 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 				D3C54C4A28F2D9FC00F25164 /* Extension.swift */,
 				D3C54C4E28F2F0B000F25164 /* BaseViewController.swift */,
 				D3D094D3294EE29700A9D7B9 /* LoginViewController.swift */,
+				D384AC1D29542C7B00FE1377 /* FirebasePractice.swift */,
+				D384AC23295539B000FE1377 /* JoinViewController.swift */,
 			);
 			path = newing;
 			sourceTree = "<group>";
@@ -224,7 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D31B723D28EC273A00407D82 /* LaunchScreen.storyboard in Resources */,
-				D3779EA728F695D900C2BFA4 /* GoogleService-Info.plist in Resources */,
+				D384AC222954662F00FE1377 /* GoogleService-Info.plist in Resources */,
 				D31B723A28EC273A00407D82 /* Assets.xcassets in Resources */,
 				D31B723828EC273900407D82 /* Main.storyboard in Resources */,
 			);
@@ -285,6 +291,8 @@
 				D3C54C5128F3DA8100F25164 /* XmlParserManager.swift in Sources */,
 				D3C54C4B28F2D9FC00F25164 /* Extension.swift in Sources */,
 				D31B723128EC273900407D82 /* AppDelegate.swift in Sources */,
+				D384AC24295539B000FE1377 /* JoinViewController.swift in Sources */,
+				D384AC1E29542C7B00FE1377 /* FirebasePractice.swift in Sources */,
 				D3D44B96294715EF00AEC435 /* ArticleViewController.swift in Sources */,
 				D3C54C4928F2BD6500F25164 /* HeadlineTableViewCell.swift in Sources */,
 				D3C54C4F28F2F0B000F25164 /* BaseViewController.swift in Sources */,

@@ -15,6 +15,10 @@ pod 'ReadabilityKit'
 pod 'Untagger'
 pod 'GoogleSignIn'
 
+pod 'FirebaseAnalytics'
+pod 'FirebaseAuth'
+
+
  # Pods for SignInWithGoogle_Example
 
 

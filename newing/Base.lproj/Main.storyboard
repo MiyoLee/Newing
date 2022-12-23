@@ -73,7 +73,7 @@
                                 </connections>
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qyj-dE-cCt" userLabel="tfSearch">
-                                <rect key="frame" x="10" y="107" width="283.66666666666669" height="34"/>
+                                <rect key="frame" x="10" y="107" width="283.66666666666663" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="6lk-u2-LNG"/>
                                 </constraints>
@@ -374,16 +374,68 @@
                                     <action selector="btnBackTouched:" destination="Y2q-hf-heU" eventType="touchUpInside" id="hDa-8v-GdA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JT0-Iw-EEO" userLabel="btnGoogleSignIn" customClass="GIDSignInButton">
-                                <rect key="frame" x="127.66666666666669" y="411" width="135" height="35"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Piv-JX-IdL" userLabel="vSignIn">
+                                <rect key="frame" x="16" y="247" width="358" height="208"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mkR-im-xWv">
+                                        <rect key="frame" x="79" y="10" width="200" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="75e-M3-L7l"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZCW-bG-lDC">
+                                        <rect key="frame" x="79" y="54" width="200" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiI-t4-axE" userLabel="btnSignIn">
+                                        <rect key="frame" x="79" y="108" width="200" height="35"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="gray" title="Sign In"/>
+                                        <connections>
+                                            <action selector="btnSignInTouched:" destination="Y2q-hf-heU" eventType="touchUpInside" id="Vuc-Bf-6bg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JT0-Iw-EEO" userLabel="btnGoogleSignIn" customClass="GIDSignInButton">
+                                        <rect key="frame" x="79" y="163" width="200" height="35"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Google Sign In"/>
+                                        <connections>
+                                            <action selector="btnGoogleSignInTouched:" destination="Y2q-hf-heU" eventType="touchUpInside" id="vAB-l2-5Ut"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="ZCW-bG-lDC" firstAttribute="centerX" secondItem="Piv-JX-IdL" secondAttribute="centerX" id="E6L-wl-e0j"/>
+                                    <constraint firstItem="JT0-Iw-EEO" firstAttribute="width" secondItem="mkR-im-xWv" secondAttribute="width" id="L3V-VN-32d"/>
+                                    <constraint firstItem="JT0-Iw-EEO" firstAttribute="top" secondItem="eiI-t4-axE" secondAttribute="bottom" constant="20" id="W9w-XE-OCH"/>
+                                    <constraint firstItem="eiI-t4-axE" firstAttribute="centerX" secondItem="Piv-JX-IdL" secondAttribute="centerX" id="WNi-gF-dpw"/>
+                                    <constraint firstItem="ZCW-bG-lDC" firstAttribute="top" secondItem="mkR-im-xWv" secondAttribute="bottom" constant="10" id="Ygo-e5-6VL"/>
+                                    <constraint firstItem="mkR-im-xWv" firstAttribute="top" secondItem="Piv-JX-IdL" secondAttribute="top" constant="10" id="do6-q2-G7k"/>
+                                    <constraint firstItem="ZCW-bG-lDC" firstAttribute="width" secondItem="mkR-im-xWv" secondAttribute="width" id="fe8-Ud-TIM"/>
+                                    <constraint firstItem="eiI-t4-axE" firstAttribute="top" secondItem="ZCW-bG-lDC" secondAttribute="bottom" constant="20" id="kq9-wf-gCz"/>
+                                    <constraint firstItem="JT0-Iw-EEO" firstAttribute="centerX" secondItem="Piv-JX-IdL" secondAttribute="centerX" id="tV7-Ml-gMr"/>
+                                    <constraint firstItem="mkR-im-xWv" firstAttribute="centerX" secondItem="Piv-JX-IdL" secondAttribute="centerX" id="vz0-3g-3lh"/>
+                                    <constraint firstAttribute="bottom" secondItem="JT0-Iw-EEO" secondAttribute="bottom" constant="10" id="y27-QR-GxC"/>
+                                    <constraint firstItem="eiI-t4-axE" firstAttribute="width" secondItem="mkR-im-xWv" secondAttribute="width" id="yee-RB-4Xd"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y0U-GO-W0m" userLabel="btnSignUp">
+                                <rect key="frame" x="95" y="475" width="200" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="EeM-Ho-EjK"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Google Sign In"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Sign Up"/>
                                 <connections>
-                                    <action selector="btnGoogleSignInTouched:" destination="Y2q-hf-heU" eventType="touchUpInside" id="vAB-l2-5Ut"/>
+                                    <action selector="btnSignUpTouched:" destination="Y2q-hf-heU" eventType="touchUpInside" id="2Vi-hi-6o5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ubw-xL-CRu" userLabel="btnSignOut">
-                                <rect key="frame" x="150" y="454" width="90" height="35"/>
+                                <rect key="frame" x="150" y="692" width="90" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Sign Out"/>
                                 <connections>
@@ -394,10 +446,14 @@
                         <viewLayoutGuide key="safeArea" id="gZO-BD-5SG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ubw-xL-CRu" firstAttribute="top" secondItem="JT0-Iw-EEO" secondAttribute="bottom" constant="8" symbolic="YES" id="0b3-oV-HwA"/>
-                            <constraint firstItem="JT0-Iw-EEO" firstAttribute="centerY" secondItem="gZO-BD-5SG" secondAttribute="centerY" id="YC7-wX-2Dx"/>
+                            <constraint firstItem="Y0U-GO-W0m" firstAttribute="top" secondItem="Piv-JX-IdL" secondAttribute="bottom" constant="20" id="7Nn-zK-xDt"/>
+                            <constraint firstItem="Y0U-GO-W0m" firstAttribute="centerX" secondItem="gZO-BD-5SG" secondAttribute="centerX" id="8eJ-HE-uXU"/>
+                            <constraint firstItem="Piv-JX-IdL" firstAttribute="centerX" secondItem="gZO-BD-5SG" secondAttribute="centerX" id="CLG-JC-5Cq"/>
+                            <constraint firstItem="Ubw-xL-CRu" firstAttribute="centerX" secondItem="Piv-JX-IdL" secondAttribute="centerX" id="RXu-m1-Ha0"/>
                             <constraint firstItem="gZO-BD-5SG" firstAttribute="top" secondItem="nXC-ua-fU3" secondAttribute="top" constant="10" id="YtB-Bc-OWF"/>
-                            <constraint firstItem="JT0-Iw-EEO" firstAttribute="centerX" secondItem="gZO-BD-5SG" secondAttribute="centerX" id="hEs-UT-tQR"/>
+                            <constraint firstItem="gZO-BD-5SG" firstAttribute="bottom" secondItem="Ubw-xL-CRu" secondAttribute="bottom" constant="83" id="dUL-sG-iml"/>
+                            <constraint firstItem="Piv-JX-IdL" firstAttribute="top" secondItem="gZO-BD-5SG" secondAttribute="top" constant="200" id="gRW-Bh-Nbq"/>
+                            <constraint firstItem="Piv-JX-IdL" firstAttribute="leading" secondItem="VOP-VF-VQx" secondAttribute="leadingMargin" id="hPj-oP-bSC"/>
                             <constraint firstItem="nXC-ua-fU3" firstAttribute="leading" secondItem="gZO-BD-5SG" secondAttribute="leading" constant="12" id="ssy-C3-1z6"/>
                             <constraint firstItem="Ubw-xL-CRu" firstAttribute="centerX" secondItem="gZO-BD-5SG" secondAttribute="centerX" id="yXK-pa-hZH"/>
                         </constraints>
@@ -405,11 +461,68 @@
                     <connections>
                         <outlet property="btnGoogleSignIn" destination="JT0-Iw-EEO" id="5HB-zi-NfA"/>
                         <outlet property="btnSignOut" destination="Ubw-xL-CRu" id="Zl4-gx-b5J"/>
+                        <outlet property="btnSignUp" destination="Y0U-GO-W0m" id="aJd-gS-Pt5"/>
+                        <outlet property="tfEmail" destination="mkR-im-xWv" id="EMy-iz-VyI"/>
+                        <outlet property="tfPassword" destination="ZCW-bG-lDC" id="zop-Jq-INb"/>
+                        <outlet property="vSignIn" destination="Piv-JX-IdL" id="Qkn-dq-tLE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5mW-id-rux" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1366.1538461538462" y="-1094.0758293838862"/>
+        </scene>
+        <!--Join View Controller-->
+        <scene sceneID="30f-ws-60u">
+            <objects>
+                <viewController storyboardIdentifier="JoinVC" id="795-bI-oM6" customClass="JoinViewController" customModule="newing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aHQ-Tj-d6Q">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IDF-f8-Nri">
+                                <rect key="frame" x="147" y="260" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQz-YI-amy" userLabel="btnCreateAccount">
+                                <rect key="frame" x="125" y="363" width="143" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Create Account"/>
+                                <connections>
+                                    <action selector="btnCreateAccountTouched:" destination="795-bI-oM6" eventType="touchUpInside" id="14b-UT-dy6"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PZ7-fF-HVH">
+                                <rect key="frame" x="148" y="309" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ad8-9E-7Cp" userLabel="btnBack">
+                                <rect key="frame" x="16" y="47" width="50" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.backward" catalog="system"/>
+                                <connections>
+                                    <action selector="btnBackTouched:" destination="Y2q-hf-heU" eventType="touchUpInside" id="SWc-G9-nAn"/>
+                                    <action selector="btnBackTouched:" destination="795-bI-oM6" eventType="touchUpInside" id="ddI-dn-uCp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="u2S-s9-X5m"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="tfEmail" destination="IDF-f8-Nri" id="qcb-CO-ikj"/>
+                        <outlet property="tfPassword" destination="PZ7-fF-HVH" id="erI-cg-7gY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jfd-6y-4FT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-625" y="-1094"/>
         </scene>
         <!--Base View Controller-->
         <scene sceneID="QvM-BD-JDj">

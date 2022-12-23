@@ -59,8 +59,18 @@ class BaseViewController: UIViewController {
     func addProfile() {
         btnProfile.removeFromSuperview()
         viewHeader.addSubview(btnProfile)
-        if UserDefaults.standard.object(forKey: "emailAddress") != nil {    // 로그인 상태일 때
-            btnProfile.setTitle(UserDefaults.standard.string(forKey: "givenName"), for: .normal)
+        btnProfile.setTitleColor(.systemIndigo, for: .normal)
+        if UserDefaults.standard.object(forKey: "userId") != nil {    // 로그인 상태일 때
+            if let givenName = UserDefaults.standard.string(forKey: "givenName") {  // 구글로그인 상태일때
+                btnProfile.setTitle(givenName, for: .normal)
+            } else {
+                if var email = UserDefaults.standard.object(forKey: "emailAddress") {   // 자체로그인 상태일때
+                    let emailString = email as! String
+                    var tokens = emailString.components(separatedBy: "@")
+                    let IdFromEmail = tokens[0]
+                    btnProfile.setTitle(IdFromEmail, for: .normal)
+                }
+            }
         } else {    // 로그아웃 상태일 때
             btnProfile.setTitle("Sign in", for: .normal)
         }
