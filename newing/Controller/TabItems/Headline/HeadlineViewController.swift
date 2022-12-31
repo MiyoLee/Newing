@@ -55,6 +55,7 @@ extension HeadlineViewController: UITableViewDelegate, UITableViewDataSource {
         var article = articles[indexPath.row]
         let title = article.title
         let source = article.source?.name
+        var dateStr = article.publishedAt
         
         // date 형식 변경 start
         let strategy = Date.ParseStrategy(format: "\(year: .defaultDigits)-\(month: .twoDigits)-\(day: .twoDigits)T\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased)):\(minute: .twoDigits):\(second: .twoDigits)\(timeZone: .iso8601(.short))", timeZone: .current)
@@ -62,8 +63,12 @@ extension HeadlineViewController: UITableViewDelegate, UITableViewDataSource {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en")
         dateFormatter.dateFormat = "dd MMM yyyy"
-        let dateStr = dateFormatter.string(from: date!)   // date to string
-        article.publishedAt = dateStr
+        
+        if date != nil {
+            dateStr = dateFormatter.string(from: date!)   // date to string
+        }
+        
+        articles[indexPath.row].publishedAt = dateStr // set publishedAt
         // date 형식 변경 end
         
         let urlToImage = article.urlToImage

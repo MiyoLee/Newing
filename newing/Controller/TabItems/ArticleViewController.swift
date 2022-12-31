@@ -20,8 +20,8 @@ class ArticleViewController: BaseViewController {
     @IBOutlet weak var lbContent: UILabel!
     @IBOutlet weak var viewContentWrapper: UIView!
     
+    var isSaved: Bool = false   // 이 뉴스가 저장된 뉴스인지?
     var userId: String?
-    
     var urlStr: String = ""
     var articleTitle: String = ""
     var source: String = ""
@@ -34,8 +34,10 @@ class ArticleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        loadArticle()
-        print("loadArticleFinished")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setup()
     }
     
     func setup() {
@@ -45,14 +47,34 @@ class ArticleViewController: BaseViewController {
     
     func setupView() {
         addHeader(type: 2)
-        addBtnPlus()
+        if isSaved {
+            addBtnMemo()
+        } else {
+            addBtnPlus()
+        }
         viewContentWrapper.layer.cornerRadius = ivImage.frame.width/16
         viewContentWrapper.clipsToBounds = true
     }
     
     func setupArticle() {
-        userId = UserDefaults.standard.object(forKey: "userId") as? String
-        article = Article(userId: userId, title: articleTitle, source: source, date: dateStr, url: urlStr, urlToImage: "", content: "")
+        if isSaved {  // 저장된 기사일 경우, article의 멤버변수로 화면 세팅.
+            if article != nil {
+                lbTitle.text = article?.title
+                lbSource.text = article?.source?.name
+                lbDate.text = article?.publishedAt
+                lbContent.text = article?.content
+                if let url = article?.urlToImage {
+                    ivImage.load(urlString: url)
+                }
+            } else {
+                NSLog("article is already saved but nil.")
+                popAlert(title: "Error", message: "Please Retry.")
+            }
+        } else {
+            userId = UserDefaults.standard.object(forKey: "userId") as? String
+            article = Article(userId: userId, title: articleTitle, source: source, date: dateStr, url: urlStr, urlToImage: "", content: "")
+            loadArticle()
+        }
     }
     
     func loadArticle() {
@@ -69,7 +91,7 @@ class ArticleViewController: BaseViewController {
                 // article 객체에 title, imageUrl set.
                 self.article?.title = title
                 self.article?.urlToImage = imageUrl
-
+                
                 self.setDataExceptContent(title: title, imgUrl: imageUrl, date: datePublished)   //컨텐츠 제외한 데이터 화면에 뿌리기
                 
             })
@@ -122,33 +144,45 @@ class ArticleViewController: BaseViewController {
     }
     
     @IBAction func btnPlusClicked(_ sender: Any) {
-        // db에 article 저장하기
-        if let arti = article {
-            myFirestore.save(arti) { error in
-                if error == nil {
-                    // confirm 띄우기
-                    self.popConfirm(title: "Added to Favorite.", message: "Would you like to go to the Favorite tab?") {
-                        
-                        // favorite 탭으로 이동, 현재 화면 닫기
-                        if let tvc = self.presentingViewController as? UITabBarController {
-                            if let vcs = tvc.viewControllers, !vcs.isEmpty {
-                                tvc.selectedIndex = 1
-                                // tvc.selectedViewController 새로고침 해야됌
-                                if let vc = tvc.selectedViewController as? FavoriteViewController {
-                                    vc.loadSavedArticles()
+        if let userId = UserDefaults.standard.object(forKey: "userId") as? String, !userId.isEmpty {   // 로그인 상태라면
+            // db에 article 저장하기
+            if let arti = article {
+                myFirestore.save(arti) { error in
+                    if error == nil {
+                        // confirm 띄우기
+                        self.popConfirm(title: "Added to Favorite.", message: "Would you like to go to the Favorite tab?") {
+                            
+                            // favorite 탭으로 이동, 현재 화면 닫기
+                            if let tvc = self.presentingViewController as? UITabBarController {
+                                if let vcs = tvc.viewControllers, !vcs.isEmpty {
+                                    tvc.selectedIndex = 1
+                                    // tvc.selectedViewController 새로고침 해야됌
+                                    if let vc = tvc.selectedViewController as? FavoriteViewController {
+                                        vc.loadSavedArticles()
+                                    }
+                                    self.dismiss(animated: false)
                                 }
-                                self.dismiss(animated: false)
                             }
+                            
                         }
-                        
+                    } else {
+                        print("error: \(String(describing: error))")
                     }
-                } else {
-                    print("error: \(String(describing: error))")
                 }
+            } else {
+                print("article is nil!")
             }
-        } else {
-            print("article is nil!")
+        } else {    // 미로그인 상태라면
+            
+            // 로그인 페이지로 이동
+            guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController else { return }
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: true, completion: nil)
         }
         
+    }
+    
+    @IBAction func btnMemoClicked(_ sender: Any) {
+        // 메모장 띄우기
     }
 }

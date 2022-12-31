@@ -47,7 +47,7 @@ class FavoriteViewController: BaseViewController {
     }
     
     func loadSavedArticles() {
-        savedArticles = []  // 초기화
+        savedArticles.removeAll()
         
         if let currentUserId = UserDefaults.standard.string(forKey: "userId"), !currentUserId.isEmpty {
             db.collection("saved_article").whereField("userId", isEqualTo: currentUserId).order(by: "dateTime", descending: true)
@@ -72,6 +72,7 @@ class FavoriteViewController: BaseViewController {
             }
         } else {
             print("Not logged in.")
+            tvFavorite?.reloadData()
         }
     }
     
@@ -111,7 +112,9 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         articleVC.articleTitle = article.title!
         articleVC.source = (article.source?.name)!
         articleVC.dateStr = article.publishedAt!
-        
+        // 저장된 기사이므로 article객체 그대로 넘겨줌
+        articleVC.isSaved = true
+        articleVC.article = article
         // 전환된 화면이 보여지는 방법 설정 (fullScreen)
         articleVC.modalPresentationStyle = .fullScreen
         self.present(articleVC, animated: false, completion: nil)

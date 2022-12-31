@@ -142,6 +142,9 @@ class LoginViewController: UIViewController {
                     if let vc = vc as? BaseViewController {
                         vc.addProfile()
                     }
+                    if let vc = vc as? FavoriteViewController {
+                        vc.loadSavedArticles()
+                    }
                 }
             }
         }

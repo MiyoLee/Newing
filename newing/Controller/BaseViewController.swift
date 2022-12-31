@@ -144,6 +144,35 @@ class BaseViewController: UIViewController {
         
     }
     
+    func addBtnMemo() {
+        
+        let btnMemo = UIButton()
+        self.view.addSubview(btnMemo)
+        self.view.bringSubviewToFront(btnMemo)
+        
+        btnMemo.setTitle("", for: .normal)
+        btnMemo.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+        btnMemo.backgroundColor = .systemIndigo
+        btnMemo.tintColor = UIColor(rgb: 0xD2DAFF)
+        btnMemo.layer.cornerRadius = 25
+        btnMemo.layer.cornerCurve = .continuous
+        btnMemo.layer.shadowColor = UIColor.gray.cgColor
+        btnMemo.layer.shadowOpacity = 1.0
+        btnMemo.layer.shadowOffset = CGSize(width: 3, height: 3)
+        btnMemo.layer.shadowRadius = 6
+        btnMemo.layer.zPosition = 999
+        //constraint
+        btnMemo.translatesAutoresizingMaskIntoConstraints = false //contraint를 주기 위해서 false로 설정
+        btnMemo.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        btnMemo.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        btnMemo.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
+        btnMemo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        
+        //클릭 이벤트
+        btnMemo.addTarget(self, action: "btnMemoClicked:", for: .touchUpInside)
+        
+    }
+    
     @IBAction func btnProfileClicked(_ sender: UIButton?) {
         
         //LoginViewController로 이동
@@ -151,9 +180,11 @@ class BaseViewController: UIViewController {
         
         loginVC.modalPresentationStyle = .fullScreen
         
-        self.present(loginVC, animated: false, completion: nil)
+        self.present(loginVC, animated: true, completion: nil)
         
     }
+    
+    
     
     func popAlert(title: String?, message: String?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
@@ -167,8 +198,7 @@ class BaseViewController: UIViewController {
     func popConfirm(title: String?, message: String?, actionForYes: @escaping () -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .default) { action in
-          //취소처리
-            self.dismiss(animated: false)
+          //취소처리. 아무것도 안함.
         })
         alert.addAction(UIAlertAction(title: "Yes", style: .default) { action in
           //확인처리
