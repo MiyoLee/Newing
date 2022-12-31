@@ -17,6 +17,8 @@ pod 'GoogleSignIn'
 
 pod 'FirebaseAnalytics'
 pod 'FirebaseAuth'
+pod 'FirebaseFirestore'
+pod 'FirebaseFirestoreSwift'
 
 
  # Pods for SignInWithGoogle_Example
