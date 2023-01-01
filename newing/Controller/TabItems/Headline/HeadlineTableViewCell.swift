@@ -28,10 +28,11 @@ class HeadlineTableViewCell: UITableViewCell {
     }
     
     func loadImage(url: String?){
-        if let url{
+        if let url, !url.isEmpty {
             ivImage.load(urlString: url)
         } else{
             // 기본이미지 로드
+            ivImage.image = UIImage(named: "newing_logo")
         }
     }
 }

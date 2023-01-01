@@ -26,24 +26,6 @@ class FavoriteViewController: BaseViewController {
         super.viewDidLoad()
         addHeader(type: 1)
         loadSavedArticles()
-        
-//        let settings = FirestoreSettings()
-//
-//        Firestore.firestore().settings = settings
-//
-//
-//        db = Firestore.firestore()
-//
-//        savedArticlesRef = db.collection("search_keyword")
-//        savedArticlesRef.document("62aZyLAB3DFVC75aYpAC").getDocument { document, err in
-//                guard let document = document else {
-//                    print("Firestore>> document is nil")
-//                    return
-//                }
-//
-//            print(document.data())
-//
-//        }
     }
     
     func loadSavedArticles() {
@@ -60,6 +42,7 @@ class FavoriteViewController: BaseViewController {
                             var a: Article? = nil
                             do {
                                 a = try document.data(as: Article.self)
+                                a?.documentId = document.documentID
                                 if a != nil {
                                     self?.savedArticles.append(a!)
                                 }
@@ -119,4 +102,47 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         articleVC.modalPresentationStyle = .fullScreen
         self.present(articleVC, animated: false, completion: nil)
     }
+    
+    // 스와이프해서 삭제하기 시도..안됌
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//
+//        let deleteAction = UIContextualAction(style: .destructive, title: "잘가시츄..") { (action, view, success ) in
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//            // firestore에서 삭제하기
+//            self.db.collection("saved_article").document(self.savedArticles[indexPath.row].documentId!).delete() { err in
+//                if let err = err {
+//                    print("Error removing document: \(err)")
+//                } else {
+//                    print("Document successfully removed!")
+//                    self.savedArticles.remove(at: indexPath.row)
+//                }
+//            }
+//        }
+//        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+//        config.performsFirstActionWithFullSwipe = false
+//        return config
+//    }
+//
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//    // 스와이프해서 삭제하기
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        if editingStyle == .delete {
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//            // firestore에서 삭제하기
+//            db.collection("saved_article").document(savedArticles[indexPath.row].documentId!).delete() { err in
+//                if let err = err {
+//                    print("Error removing document: \(err)")
+//                } else {
+//                    print("Document successfully removed!")
+//                }
+//            }
+//            savedArticles.remove(at: indexPath.row)
+//
+//        } else if editingStyle == .insert {
+//
+//        }
+//    }
 }

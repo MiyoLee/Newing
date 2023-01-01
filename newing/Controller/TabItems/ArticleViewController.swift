@@ -63,8 +63,10 @@ class ArticleViewController: BaseViewController {
                 lbSource.text = article?.source?.name
                 lbDate.text = article?.publishedAt
                 lbContent.text = article?.content
-                if let url = article?.urlToImage {
+                if let url = article?.urlToImage, !url.isEmpty {
                     ivImage.load(urlString: url)
+                } else {
+                    ivImage.image = UIImage(named: "newing_logo")
                 }
             } else {
                 NSLog("article is already saved but nil.")

@@ -2,6 +2,7 @@
 import Foundation
 
 struct Article: Codable {
+    var documentId: String?
     let userId: String?
     var title: String?
     var source: Source?
@@ -13,6 +14,7 @@ struct Article: Codable {
 //    let description: String?
     
     init( userId: String?, title: String?, source: String?, date: String?, url: String?, urlToImage: String?, content: String?) {
+        self.documentId = nil
         self.userId = userId
         self.title = title
         self.source = Source(id: nil, name: source)
@@ -26,6 +28,7 @@ struct Article: Codable {
     
     
     enum CodingKeys: String, CodingKey {
+        case documentId
         case userId
         case title
         case source
