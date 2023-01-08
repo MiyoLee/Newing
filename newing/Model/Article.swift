@@ -10,6 +10,7 @@ struct Article: Codable {
     let url: String?
     var urlToImage: String?
     var content: String?
+    var userMemo: String?
 //    let author: String?
 //    let description: String?
     
@@ -22,6 +23,7 @@ struct Article: Codable {
         self.url = url
         self.urlToImage = urlToImage
         self.content = content
+        self.userMemo = nil
 //        self.author = ""
 //        self.description = ""
     }
@@ -36,6 +38,7 @@ struct Article: Codable {
         case url
         case urlToImage
         case content
+        case userMemo
 //        case author
 //        case description
     }

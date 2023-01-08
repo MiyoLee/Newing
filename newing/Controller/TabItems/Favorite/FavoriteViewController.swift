@@ -91,13 +91,14 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         guard let articleVC = self.storyboard?.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController else { return }
         
         let article = savedArticles[indexPath.row]
-        articleVC.urlStr = article.url!
-        articleVC.articleTitle = article.title!
-        articleVC.source = (article.source?.name)!
-        articleVC.dateStr = article.publishedAt!
+//        articleVC.urlStr = article.url!
+//        articleVC.articleTitle = article.title!
+//        articleVC.source = (article.source?.name)!
+//        articleVC.dateStr = article.publishedAt!
         // 저장된 기사이므로 article객체 그대로 넘겨줌
         articleVC.isSaved = true
-        articleVC.article = article
+        articleVC.documentId = article.documentId
+        // articleVC.article = article
         // 전환된 화면이 보여지는 방법 설정 (fullScreen)
         articleVC.modalPresentationStyle = .fullScreen
         self.present(articleVC, animated: false, completion: nil)
