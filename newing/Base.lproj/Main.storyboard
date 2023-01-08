@@ -196,6 +196,7 @@
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.93056784420000005" green="0.92794767509999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="jdj-uY-RYJ" firstAttribute="top" secondItem="MRe-r5-bfk" secondAttribute="bottom" constant="18" id="05d-wx-KMm"/>
                                             <constraint firstItem="nrQ-GY-bUw" firstAttribute="centerX" secondItem="zxy-XW-IMO" secondAttribute="centerX" id="CND-6s-oa5"/>
@@ -212,7 +213,23 @@
                                             <constraint firstAttribute="bottom" secondItem="nrQ-GY-bUw" secondAttribute="bottom" constant="10" id="sQS-ut-nRL"/>
                                             <constraint firstItem="nrQ-GY-bUw" firstAttribute="width" secondItem="zxy-XW-IMO" secondAttribute="width" multiplier="0.948718" id="tW1-hH-93J"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="f2E-Oo-asM" appends="YES" id="ogS-1q-jHo"/>
+                                        </connections>
                                     </view>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WDU-Pn-uNb">
+                                        <rect key="frame" x="30" y="383" width="330" height="280"/>
+                                        <color key="backgroundColor" red="0.96841138599999999" green="0.93546867209999995" blue="0.58578791109999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="280" id="VEc-6N-vQr"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Light" family="Chalkboard SE" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartQuotesType="no"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="wgw-4j-efC" id="CoQ-5b-sam"/>
+                                        </connections>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93056784420000005" green="0.92794767509999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -230,7 +247,10 @@
                         <color key="backgroundColor" red="0.93056784420000005" green="0.92794767509999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="euC-9u-a2K" firstAttribute="trailing" secondItem="eat-Ht-U8u" secondAttribute="trailing" id="0mc-FY-P8E"/>
+                            <constraint firstItem="WDU-Pn-uNb" firstAttribute="leading" secondItem="eat-Ht-U8u" secondAttribute="leading" constant="30" id="3Mq-21-KJh"/>
+                            <constraint firstItem="eat-Ht-U8u" firstAttribute="bottom" secondItem="WDU-Pn-uNb" secondAttribute="bottom" constant="100" id="AXw-sx-310"/>
                             <constraint firstItem="euC-9u-a2K" firstAttribute="top" secondItem="eat-Ht-U8u" secondAttribute="top" id="XrB-uU-AKu"/>
+                            <constraint firstItem="WDU-Pn-uNb" firstAttribute="centerX" secondItem="eat-Ht-U8u" secondAttribute="centerX" id="YXs-gJ-EaP"/>
                             <constraint firstItem="euC-9u-a2K" firstAttribute="leading" secondItem="eat-Ht-U8u" secondAttribute="leading" id="cnB-7d-qnP"/>
                             <constraint firstItem="eat-Ht-U8u" firstAttribute="bottom" secondItem="euC-9u-a2K" secondAttribute="bottom" id="orN-fQ-eji"/>
                         </constraints>
@@ -241,10 +261,17 @@
                         <outlet property="lbDate" destination="k46-5f-tGf" id="T4G-gg-xKZ"/>
                         <outlet property="lbSource" destination="MRe-r5-bfk" id="s82-si-LSb"/>
                         <outlet property="lbTitle" destination="gBj-Gq-Dc4" id="F4x-IW-JXM"/>
+                        <outlet property="tvMemo" destination="WDU-Pn-uNb" id="hC9-WZ-3jv"/>
+                        <outlet property="viewContent" destination="zxy-XW-IMO" id="a1h-zu-Rj9"/>
                         <outlet property="viewContentWrapper" destination="nrQ-GY-bUw" id="tAf-gt-QPp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C5y-Nr-Yjv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="f2E-Oo-asM">
+                    <connections>
+                        <action selector="tapBackgroundView:" destination="wgw-4j-efC" id="d8p-ul-k3E"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1250.7692307692307" y="-707.34597156398104"/>
         </scene>

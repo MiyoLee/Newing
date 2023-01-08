@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		470A1599EB3781AD94D4108F /* Pods_newing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C417507089A285C8C5E3226E /* Pods_newing.framework */; };
+		D312C5982967F227006E0868 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312C5972967F227006E0868 /* UIViewController.swift */; };
 		D31B723128EC273900407D82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B723028EC273900407D82 /* AppDelegate.swift */; };
 		D31B723328EC273900407D82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B723228EC273900407D82 /* SceneDelegate.swift */; };
 		D31B723528EC273900407D82 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B723428EC273900407D82 /* SearchViewController.swift */; };
@@ -17,6 +18,7 @@
 		D31B724628EC2C9D00407D82 /* HeadlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B724528EC2C9D00407D82 /* HeadlineViewController.swift */; };
 		D31B724828EC2CB200407D82 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B724728EC2CB200407D82 /* FavoriteViewController.swift */; };
 		D31C3CDB295D792600EA784D /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C3CDA295D792600EA784D /* FavoriteTableViewCell.swift */; };
+		D31C3CF32963C38100EA784D /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C3CF22963C38100EA784D /* UITextField.swift */; };
 		D3779EAA28F6973200C2BFA4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D3779EA928F6973200C2BFA4 /* FirebaseAnalytics */; };
 		D384AC222954662F00FE1377 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3779EA628F695D800C2BFA4 /* GoogleService-Info.plist */; };
 		D384AC24295539B000FE1377 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384AC23295539B000FE1377 /* JoinViewController.swift */; };
@@ -38,6 +40,7 @@
 		1D218AEBB1834C5ADFA201D7 /* Pods-newing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newing.release.xcconfig"; path = "Target Support Files/Pods-newing/Pods-newing.release.xcconfig"; sourceTree = "<group>"; };
 		4C1455C377E354C7CD35EBD7 /* Pods-newing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newing.debug.xcconfig"; path = "Target Support Files/Pods-newing/Pods-newing.debug.xcconfig"; sourceTree = "<group>"; };
 		C417507089A285C8C5E3226E /* Pods_newing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_newing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D312C5972967F227006E0868 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		D31B722D28EC273900407D82 /* newing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D31B723028EC273900407D82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D31B723228EC273900407D82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		D31B724528EC2C9D00407D82 /* HeadlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlineViewController.swift; sourceTree = "<group>"; };
 		D31B724728EC2CB200407D82 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		D31C3CDA295D792600EA784D /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		D31C3CF22963C38100EA784D /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		D3779EA628F695D800C2BFA4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D384AC192951959100FE1377 /* newing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = newing.entitlements; sourceTree = "<group>"; };
 		D384AC23295539B000FE1377 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				D3C54C4A28F2D9FC00F25164 /* UIColor.swift */,
 				D3C1C562295C1C9B00CC15CB /* Encodable.swift */,
 				D3C1C564295C1CCA00CC15CB /* UIImageView.swift */,
+				D31C3CF22963C38100EA784D /* UITextField.swift */,
+				D312C5972967F227006E0868 /* UIViewController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -351,8 +357,10 @@
 				D3C1C55D295C1A4E00CC15CB /* MyFireStore.swift in Sources */,
 				D384AC24295539B000FE1377 /* JoinViewController.swift in Sources */,
 				D3D44B96294715EF00AEC435 /* ArticleViewController.swift in Sources */,
+				D31C3CF32963C38100EA784D /* UITextField.swift in Sources */,
 				D3C1C565295C1CCA00CC15CB /* UIImageView.swift in Sources */,
 				D3C54C4928F2BD6500F25164 /* HeadlineTableViewCell.swift in Sources */,
+				D312C5982967F227006E0868 /* UIViewController.swift in Sources */,
 				D3C54C4F28F2F0B000F25164 /* BaseViewController.swift in Sources */,
 				D3C1C55F295C1C3E00CC15CB /* FirestoreError.swift in Sources */,
 				D31B723328EC273900407D82 /* SceneDelegate.swift in Sources */,

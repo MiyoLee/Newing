@@ -13,12 +13,14 @@ import FirebaseFirestore
 
 class ArticleViewController: BaseViewController {
     
+    @IBOutlet weak var viewContent: UIView!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbSource: UILabel!
     @IBOutlet weak var lbDate: UILabel!
     @IBOutlet weak var ivImage: UIImageView!
     @IBOutlet weak var lbContent: UILabel!
     @IBOutlet weak var viewContentWrapper: UIView!
+    @IBOutlet weak var tvMemo: UITextView!
     
     var isSaved: Bool = false   // 이 뉴스가 저장된 뉴스인지?
     var userId: String?
@@ -28,11 +30,13 @@ class ArticleViewController: BaseViewController {
     var date: Date?
     var dateStr: String = ""
     var article: Article? = nil
+    let textViewPlaceHolder = "Please leave a note.\n- What do you think of this article?\n- What did you learn from this article?"
     
     let myFirestore = MyFirestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setKeyboardObserver()
         setup()
     }
     
@@ -47,13 +51,20 @@ class ArticleViewController: BaseViewController {
     
     func setupView() {
         addHeader(type: 2)
+        // set floating button
         if isSaved {
             addBtnMemo()
         } else {
             addBtnPlus()
         }
+        // set content
         viewContentWrapper.layer.cornerRadius = ivImage.frame.width/16
         viewContentWrapper.clipsToBounds = true
+        
+        // set memo
+        tvMemo.text = textViewPlaceHolder
+        tvMemo.textContainerInset = UIEdgeInsets(top: 18, left: 18, bottom: 18, right: 18)
+        tvMemo.isHidden = true
     }
     
     func setupArticle() {
@@ -185,6 +196,33 @@ class ArticleViewController: BaseViewController {
     }
     
     @IBAction func btnMemoClicked(_ sender: Any) {
-        // 메모장 띄우기
+        if !tvMemo.isHidden {
+            tapBackgroundView(sender)
+        }
+        tvMemo.isHidden = !tvMemo.isHidden
     }
+    
+    @IBAction func tapBackgroundView(_ sender: Any) {
+        view.endEditing(true)
+        // firestore에 저장하기
+    }
+}
+
+extension ArticleViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == textViewPlaceHolder && textView.textColor != .black {   //회색으로 적힌 placeholder라면
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = textViewPlaceHolder
+            textView.textColor = .lightGray
+        }
+    }
+    
+    
 }
