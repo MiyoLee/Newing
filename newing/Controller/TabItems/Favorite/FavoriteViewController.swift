@@ -26,10 +26,19 @@ class FavoriteViewController: BaseViewController {
         super.viewDidLoad()
         addHeader(type: 1)
         loadSavedArticles()
+        
+        // pull to refresh 세팅
+        tvFavorite.refreshControl = UIRefreshControl()
+        tvFavorite.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
+    }
+    
+    @objc func pullToRefresh(_ sender: Any) {
+        tvFavorite.refreshControl?.endRefreshing()
+        loadSavedArticles()
     }
     
     func loadSavedArticles() {
-        savedArticles.removeAll()
+        var tmpSavedArticles: [Article] = []
         
         if let currentUserId = UserDefaults.standard.string(forKey: "userId"), !currentUserId.isEmpty {
             db.collection("saved_article").whereField("userId", isEqualTo: currentUserId).order(by: "dateTime", descending: true)
@@ -44,12 +53,13 @@ class FavoriteViewController: BaseViewController {
                                 a = try document.data(as: Article.self)
                                 a?.documentId = document.documentID
                                 if a != nil {
-                                    self?.savedArticles.append(a!)
+                                    tmpSavedArticles.append(a!)
                                 }
                             } catch {
                                 print(error)
                             }
                         }
+                        self?.savedArticles = tmpSavedArticles
                         self?.tvFavorite.reloadData()
                     }
             }
@@ -91,59 +101,11 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         guard let articleVC = self.storyboard?.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController else { return }
         
         let article = savedArticles[indexPath.row]
-//        articleVC.urlStr = article.url!
-//        articleVC.articleTitle = article.title!
-//        articleVC.source = (article.source?.name)!
-//        articleVC.dateStr = article.publishedAt!
-        // 저장된 기사이므로 article객체 그대로 넘겨줌
         articleVC.isSaved = true
         articleVC.documentId = article.documentId
-        // articleVC.article = article
+        
         // 전환된 화면이 보여지는 방법 설정 (fullScreen)
         articleVC.modalPresentationStyle = .fullScreen
         self.present(articleVC, animated: false, completion: nil)
     }
-    
-    // 스와이프해서 삭제하기 시도..안됌
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//
-//        let deleteAction = UIContextualAction(style: .destructive, title: "잘가시츄..") { (action, view, success ) in
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            // firestore에서 삭제하기
-//            self.db.collection("saved_article").document(self.savedArticles[indexPath.row].documentId!).delete() { err in
-//                if let err = err {
-//                    print("Error removing document: \(err)")
-//                } else {
-//                    print("Document successfully removed!")
-//                    self.savedArticles.remove(at: indexPath.row)
-//                }
-//            }
-//        }
-//        let config = UISwipeActionsConfiguration(actions: [deleteAction])
-//        config.performsFirstActionWithFullSwipe = false
-//        return config
-//    }
-//
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//    // 스와이프해서 삭제하기
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//        if editingStyle == .delete {
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            // firestore에서 삭제하기
-//            db.collection("saved_article").document(savedArticles[indexPath.row].documentId!).delete() { err in
-//                if let err = err {
-//                    print("Error removing document: \(err)")
-//                } else {
-//                    print("Document successfully removed!")
-//                }
-//            }
-//            savedArticles.remove(at: indexPath.row)
-//
-//        } else if editingStyle == .insert {
-//
-//        }
-//    }
 }

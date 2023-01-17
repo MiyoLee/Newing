@@ -19,6 +19,15 @@ class HeadlineViewController: BaseViewController {
         super.viewDidLoad()
         addHeader(type: 1)
         loadArticles()
+        
+        // pull to refresh 세팅
+        tvArticles.refreshControl = UIRefreshControl()
+        tvArticles.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
+    }
+    
+    @objc func pullToRefresh(_ sender: Any) {
+        tvArticles.refreshControl?.endRefreshing()
+        loadArticles()
     }
     
     func loadArticles(){
