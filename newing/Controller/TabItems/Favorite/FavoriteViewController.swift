@@ -108,4 +108,27 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         articleVC.modalPresentationStyle = .fullScreen
         self.present(articleVC, animated: false, completion: nil)
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle { return .delete }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            // database에서 삭제
+            let article = savedArticles[indexPath.row]
+            db.collection("saved_article").document(article.documentId!).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
+
+            // savedArticles에서 삭제
+            savedArticles.remove(at: indexPath.row)
+            
+            // 테이블에서 삭제
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
