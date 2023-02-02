@@ -76,9 +76,14 @@ class SearchViewController: BaseViewController {
     }
     
     @IBAction func btnSearchTouched(_ sender: Any) {
+        search()
+    }
+    
+    func search() {
         if let text = tfSearch.text, !text.isEmpty {
             loadData()
         }
+        tfSearch.endEditing(true)
     }
 }
 
@@ -135,7 +140,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        loadData()
+        search()
         return true
     }
 }

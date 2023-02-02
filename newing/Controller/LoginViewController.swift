@@ -8,8 +8,14 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import AuthenticationServices
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+    
     
     @IBOutlet weak var vSignIn: UIView!
     @IBOutlet weak var tfEmail: UITextField!
@@ -18,13 +24,65 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var btnSignOut: UIButton!
     @IBOutlet weak var btnSignUp: UIButton!
     
+    @IBOutlet weak var btnAppleSignIn: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        setUpView()
     }
     
+    func setAppleSignInButton() {
+        let authorizationButton = ASAuthorizationAppleIDButton(type: .signIn, style: .whiteOutline)
+        authorizationButton.addTarget(self, action: #selector(btnAppleSignInPress), for: .touchUpInside)
+        self.btnAppleSignIn.addArrangedSubview(authorizationButton)
+    }
     
-    func setup() {
+    @objc func btnAppleSignInPress() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+            
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
+    // Apple ID 연동 성공 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        // Apple ID
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+                
+            // 계정 정보 가져오기
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+                
+            print("User ID : \(userIdentifier)")
+            print("User Email : \(email ?? "")")
+            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
+
+        default:
+            break
+        }
+    }
+        
+    // Apple ID 연동 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error.
+    }
+    
+    func setUpView() {
+        // 디자인 세팅
+        tfEmail.layer.borderWidth = 1
+        tfEmail.layer.borderColor = UIColor.systemIndigo.cgColor
+        tfEmail.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemIndigo])
+        tfPassword.layer.borderWidth = 1
+        tfPassword.layer.borderColor = UIColor.systemIndigo.cgColor
+        tfPassword.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemIndigo])
+        
+        // 버튼 노출 세팅
         if UserDefaults.standard.object(forKey: "userId") != nil {    // 로그인 상태
             vSignIn.isHidden = true
             btnSignUp.isHidden = true

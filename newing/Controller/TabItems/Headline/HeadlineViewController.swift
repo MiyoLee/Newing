@@ -18,11 +18,20 @@ class HeadlineViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addHeader(type: 1)
+        setUpView()
         loadArticles()
         
         // pull to refresh 세팅
         tvArticles.refreshControl = UIRefreshControl()
         tvArticles.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
+    }
+    
+    func setUpView() {
+        tvArticles.translatesAutoresizingMaskIntoConstraints = false
+        tvArticles.topAnchor.constraint(equalTo: viewHeader.bottomAnchor, constant: 0).isActive = true
+        tvArticles.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tvArticles.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        tvArticles.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
     }
     
     @objc func pullToRefresh(_ sender: Any) {

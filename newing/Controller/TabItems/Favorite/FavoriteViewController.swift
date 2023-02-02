@@ -26,10 +26,19 @@ class FavoriteViewController: BaseViewController {
         super.viewDidLoad()
         addHeader(type: 1)
         loadSavedArticles()
+        setUpView()
         
         // pull to refresh 세팅
         tvFavorite.refreshControl = UIRefreshControl()
         tvFavorite.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
+    }
+    
+    func setUpView() {
+        tvFavorite.translatesAutoresizingMaskIntoConstraints = false
+        tvFavorite.topAnchor.constraint(equalTo: viewHeader.bottomAnchor, constant: 0).isActive = true
+        tvFavorite.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tvFavorite.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        tvFavorite.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
     }
     
     @objc func pullToRefresh(_ sender: Any) {
@@ -65,6 +74,7 @@ class FavoriteViewController: BaseViewController {
             }
         } else {
             print("Not logged in.")
+            savedArticles = tmpSavedArticles
             tvFavorite?.reloadData()
         }
     }
