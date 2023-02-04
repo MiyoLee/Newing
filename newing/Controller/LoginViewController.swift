@@ -10,70 +10,47 @@ import Firebase
 import GoogleSignIn
 import AuthenticationServices
 
-class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+class LoginViewController: UIViewController{
     
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return self.view.window!
-    }
-    
-    
+
     @IBOutlet weak var vSignIn: UIView!
     @IBOutlet weak var tfEmail: UITextField!
     @IBOutlet weak var tfPassword: UITextField!
     @IBOutlet weak var btnGoogleSignIn: GIDSignInButton!
     @IBOutlet weak var btnSignOut: UIButton!
     @IBOutlet weak var btnSignUp: UIButton!
-    
-    @IBOutlet weak var btnAppleSignIn: UIStackView!
+    @IBOutlet weak var svAppleSignIn: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
     }
-    
-    func setAppleSignInButton() {
-        let authorizationButton = ASAuthorizationAppleIDButton(type: .signIn, style: .whiteOutline)
-        authorizationButton.addTarget(self, action: #selector(btnAppleSignInPress), for: .touchUpInside)
-        self.btnAppleSignIn.addArrangedSubview(authorizationButton)
+   
+    func setupProviderLoginView() {
+        let authorizationBtn = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
+        // 버튼 눌렀을 때 처리할 메서드 추가
+        authorizationBtn.addTarget(self, action: #selector(handleAuthorizationAppleIDBtnPressed), for: .touchUpInside)
+        // 아까 만들었던 스택뷰에 애플 로그인 버튼 추가
+        svAppleSignIn.addArrangedSubview(authorizationBtn)
     }
     
-    @objc func btnAppleSignInPress() {
+    // 인증을 처리할 메서드
+    @objc
+    func handleAuthorizationAppleIDBtnPressed() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
+        // 이름과 이메일 요청
         request.requestedScopes = [.fullName, .email]
-            
+     
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
     
-    // Apple ID 연동 성공 시
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-        // Apple ID
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-                
-            // 계정 정보 가져오기
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-                
-            print("User ID : \(userIdentifier)")
-            print("User Email : \(email ?? "")")
-            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-
-        default:
-            break
-        }
-    }
-        
-    // Apple ID 연동 실패 시
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // Handle error.
-    }
-    
     func setUpView() {
+        setupProviderLoginView()    // 애플로그인 버튼 세팅
+        
         // 디자인 세팅
         tfEmail.layer.borderWidth = 1
         tfEmail.layer.borderColor = UIColor.systemIndigo.cgColor
@@ -87,11 +64,13 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             vSignIn.isHidden = true
             btnSignUp.isHidden = true
             btnGoogleSignIn.isHidden = true
+            svAppleSignIn.isHidden = true
             btnSignOut.isHidden = false
         } else {    // 로그아웃 상태
             vSignIn.isHidden = false
             btnSignUp.isHidden = false
             btnGoogleSignIn.isHidden = false
+            svAppleSignIn.isHidden = false
             btnSignOut.isHidden = true
         }
         btnGoogleSignIn.style = .wide
@@ -207,5 +186,41 @@ class LoginViewController: UIViewController, ASAuthorizationControllerDelegate, 
             }
         }
         
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerDelegate {
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            
+            print("UserID: \(userIdentifier)")
+            print("FullName: \(fullName)")
+            print("Email: \(email)")
+            
+        case let passwordCredential as ASPasswordCredential:
+            
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+                        
+        default:
+            break
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // 에러 처리
     }
 }
