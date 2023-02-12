@@ -16,22 +16,65 @@ class LoginViewController: UIViewController{
     @IBOutlet weak var vSignIn: UIView!
     @IBOutlet weak var tfEmail: UITextField!
     @IBOutlet weak var tfPassword: UITextField!
-    @IBOutlet weak var btnGoogleSignIn: GIDSignInButton!
-    @IBOutlet weak var btnSignOut: UIButton!
     @IBOutlet weak var btnSignUp: UIButton!
-    @IBOutlet weak var svAppleSignIn: UIStackView!
+
+    @IBOutlet weak var svSocialLogin: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
     }
    
+    
+    
+    func setUpView() {
+        setupProviderLoginView()    // 애플, 구글로그인 버튼 세팅
+        
+        // 디자인 세팅
+        tfEmail.layer.borderWidth = 1
+        tfEmail.layer.borderColor = UIColor.systemIndigo.cgColor
+        tfEmail.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemIndigo])
+        tfPassword.layer.borderWidth = 1
+        tfPassword.layer.borderColor = UIColor.systemIndigo.cgColor
+        tfPassword.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemIndigo])
+        
+        // 버튼 노출 세팅
+        if UserDefaults.standard.object(forKey: "userId") != nil {    // 로그인 상태
+            vSignIn.isHidden = true
+            btnSignUp.isHidden = true
+            svSocialLogin.isHidden = true
+        } else {    // 로그아웃 상태
+            vSignIn.isHidden = false
+            btnSignUp.isHidden = false
+            svSocialLogin.isHidden = false
+        }
+    }
+    
     func setupProviderLoginView() {
-        let authorizationBtn = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
+        svSocialLogin.spacing = 10
+        svSocialLogin.alignment = .center
+        // 구글로그인 버튼
+        let btnGoogleSignIn = GIDSignInButton()
+        svSocialLogin.addArrangedSubview(btnGoogleSignIn)
+        btnGoogleSignIn.style = .wide
+        btnGoogleSignIn.colorScheme = .dark
+        
+        btnGoogleSignIn.translatesAutoresizingMaskIntoConstraints = false
+        btnGoogleSignIn.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        btnGoogleSignIn.addTarget(self, action: #selector(handleGoogleSignIn), for: .touchUpInside)
+        
+        // 애플로그인 버튼
+        let btnAppleSignIn = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
+        // 스택뷰에 애플 로그인 버튼 추가
+        svSocialLogin.addArrangedSubview(btnAppleSignIn)
+        
+        btnAppleSignIn.translatesAutoresizingMaskIntoConstraints = false
+        btnAppleSignIn.widthAnchor.constraint(equalToConstant: 194).isActive = true
+        
         // 버튼 눌렀을 때 처리할 메서드 추가
-        authorizationBtn.addTarget(self, action: #selector(handleAuthorizationAppleIDBtnPressed), for: .touchUpInside)
-        // 아까 만들었던 스택뷰에 애플 로그인 버튼 추가
-        svAppleSignIn.addArrangedSubview(authorizationBtn)
+        btnAppleSignIn.addTarget(self, action: #selector(handleAuthorizationAppleIDBtnPressed), for: .touchUpInside)
+        
     }
     
     // 인증을 처리할 메서드
@@ -48,35 +91,7 @@ class LoginViewController: UIViewController{
         authorizationController.performRequests()
     }
     
-    func setUpView() {
-        setupProviderLoginView()    // 애플로그인 버튼 세팅
-        
-        // 디자인 세팅
-        tfEmail.layer.borderWidth = 1
-        tfEmail.layer.borderColor = UIColor.systemIndigo.cgColor
-        tfEmail.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemIndigo])
-        tfPassword.layer.borderWidth = 1
-        tfPassword.layer.borderColor = UIColor.systemIndigo.cgColor
-        tfPassword.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemIndigo])
-        
-        // 버튼 노출 세팅
-        if UserDefaults.standard.object(forKey: "userId") != nil {    // 로그인 상태
-            vSignIn.isHidden = true
-            btnSignUp.isHidden = true
-            btnGoogleSignIn.isHidden = true
-            svAppleSignIn.isHidden = true
-            btnSignOut.isHidden = false
-        } else {    // 로그아웃 상태
-            vSignIn.isHidden = false
-            btnSignUp.isHidden = false
-            btnGoogleSignIn.isHidden = false
-            svAppleSignIn.isHidden = false
-            btnSignOut.isHidden = true
-        }
-        btnGoogleSignIn.style = .wide
-    }
-    
-    @IBAction func btnGoogleSignInTouched(_ sender: Any) {
+    @objc func handleGoogleSignIn(_ sender: Any) {
         
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let signInConfig = GIDConfiguration(clientID: clientID)
