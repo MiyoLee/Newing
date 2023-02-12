@@ -10,7 +10,7 @@ import Firebase
 import GoogleSignIn
 import AuthenticationServices
 
-class LoginViewController: UIViewController{
+class LoginViewController: BaseViewController {
     
 
     @IBOutlet weak var vSignIn: UIView!
@@ -187,20 +187,7 @@ class LoginViewController: UIViewController{
     // view 사라질때 호출됨
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        if let tvc = self.presentingViewController as? UITabBarController {
-            if let vcs = tvc.viewControllers, !vcs.isEmpty {
-                for vc in vcs {
-                    if let vc = vc as? BaseViewController {
-                        vc.addProfile()
-                    }
-                    if let vc = vc as? FavoriteViewController {
-                        vc.loadSavedArticles()
-                    }
-                }
-            }
-        }
-        
+        initTabs()
     }
 }
 

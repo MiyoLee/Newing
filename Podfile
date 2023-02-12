@@ -20,7 +20,7 @@ pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
 pod 'FirebaseFirestoreSwift'
 
-
+pod 'DropDown'
  # Pods for SignInWithGoogle_Example
 
 

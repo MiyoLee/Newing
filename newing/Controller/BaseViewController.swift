@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import DropDown
+import Firebase
+import GoogleSignIn
+import AuthenticationServices
 
 class BaseViewController: UIViewController {
     
@@ -74,9 +78,7 @@ class BaseViewController: UIViewController {
         } else {    // 로그아웃 상태일 때
             btnProfile.setTitle("Sign in", for: .normal)
         }
-        //set image
-//        btnProfile.setImage(UIImage(systemName: "person.circle"), for: .normal)
-//        btnProfile.tintColor = .darkGray
+        
         //constraint
         btnProfile.translatesAutoresizingMaskIntoConstraints = false //contraint를 주기 위해서 false로 설정
         btnProfile.centerYAnchor.constraint(equalTo: viewHeader.centerYAnchor).isActive = true
@@ -175,16 +177,66 @@ class BaseViewController: UIViewController {
     
     @IBAction func btnProfileClicked(_ sender: UIButton?) {
         
-        //LoginViewController로 이동
-        guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController else { return }
-        
-        loginVC.modalPresentationStyle = .fullScreen
-        
-        self.present(loginVC, animated: true, completion: nil)
+        if UserDefaults.standard.object(forKey: "userId") != nil { //로그인 상태일때
+            // dropdown 메뉴에 sign out 나오게
+            let dropdown = DropDown()
+            let itemList = ["Sign Out"]
+            dropdown.dataSource = itemList
+            dropdown.anchorView = btnProfile
+            dropdown.bottomOffset = CGPoint(x: 0, y: btnProfile.bounds.height)
+            
+            // Item 선택 시 처리
+            dropdown.selectionAction = { [weak self] (index, item) in
+                if item == "Sign Out" {     //로그아웃 처리
+                    let firebaseAuth = Auth.auth()
+                    do {
+                        try firebaseAuth.signOut()
+                        // 저장된 유저 정보 초기화
+                        UserDefaults.standard.set(nil, forKey: "userId")
+                        UserDefaults.standard.set(nil, forKey: "emailAddress")
+                        UserDefaults.standard.set(nil, forKey: "fullName")
+                        UserDefaults.standard.set(nil, forKey: "givenName")
+                        UserDefaults.standard.set(nil, forKey: "familyName")
+                        UserDefaults.standard.set(nil, forKey: "profilePicUrl")
+                    } catch let signOutError as NSError {
+                        print("로그아웃 Error발생:", signOutError)
+                    }
+                    // 모든 탭화면 초기화.
+                    self!.initTabs()
+                }
+            }
+            // 취소 시 처리
+            dropdown.cancelAction = { [weak self] in
+                //빈 화면 터치 시 DropDown이 사라짐
+                dropdown.hide()
+            }
+            dropdown.show()
+            
+        } else {    // 로그아웃 상태일때
+            // LoginViewController로 이동
+            guard let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController else { return }
+            
+            loginVC.modalPresentationStyle = .fullScreen
+            
+            self.present(loginVC, animated: true, completion: nil)
+        }
         
     }
     
-    
+    func initTabs() {
+        if let tvc = self.view.window?.rootViewController as? UITabBarController {
+            if let vcs = tvc.viewControllers, !vcs.isEmpty {
+                for vc in vcs {
+                    if let vc = vc as? BaseViewController {
+                        vc.addProfile()
+                    }
+                    if let vc = vc as? FavoriteViewController {
+                        vc.loadSavedArticles()
+                    }
+                }
+            }
+        }
+    }
     
     func popAlert(title: String?, message: String?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)

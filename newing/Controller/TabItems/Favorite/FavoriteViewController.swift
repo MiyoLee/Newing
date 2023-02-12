@@ -69,7 +69,7 @@ class FavoriteViewController: BaseViewController {
                             }
                         }
                         self?.savedArticles = tmpSavedArticles
-                        self?.tvFavorite.reloadData()
+                        self?.tvFavorite?.reloadData()
                     }
             }
         } else {
