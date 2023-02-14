@@ -8,6 +8,7 @@
 import UIKit
 import GoogleSignIn
 import FirebaseCore
+import AuthenticationServices
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +29,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                // Show the app's signed-in state.
 //            }
 //        }
+        
+        // 애플 로그인 관련 소스. 필요 없을것 같기도 한데...
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        appleIDProvider.getCredentialState(forUserID: UserDefaults.standard.string(forKey: "appleUserId") ?? "") { (credentialState, error) in
+                switch credentialState {
+                case .authorized:
+                    print("authorized")
+                    break
+                case .revoked:
+                    print("revoked")
+                    UserDefaults.standard.set(nil, forKey: "appleUserId")
+                    UserDefaults.standard.set(nil, forKey: "userId")
+                    UserDefaults.standard.set(nil, forKey: "emailAddress")
+                    UserDefaults.standard.set(nil, forKey: "fullName")
+                    UserDefaults.standard.set(nil, forKey: "givenName")
+                    UserDefaults.standard.set(nil, forKey: "familyName")
+                    UserDefaults.standard.set(nil, forKey: "profilePicUrl")
+                    break
+                case .notFound:
+                    print("notFound")
+                    UserDefaults.standard.set(nil, forKey: "appleUserId")
+                    UserDefaults.standard.set(nil, forKey: "userId")
+                    UserDefaults.standard.set(nil, forKey: "emailAddress")
+                    UserDefaults.standard.set(nil, forKey: "fullName")
+                    UserDefaults.standard.set(nil, forKey: "givenName")
+                    UserDefaults.standard.set(nil, forKey: "familyName")
+                    UserDefaults.standard.set(nil, forKey: "profilePicUrl")
+                default:
+                    break
+                }
+            }
         
         return true
         

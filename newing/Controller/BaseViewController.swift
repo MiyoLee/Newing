@@ -64,8 +64,8 @@ class BaseViewController: UIViewController {
         btnProfile.removeFromSuperview()
         viewHeader.addSubview(btnProfile)
         btnProfile.setTitleColor(.systemIndigo, for: .normal)
-        if UserDefaults.standard.object(forKey: "userId") != nil {    // 로그인 상태일 때
-            if let givenName = UserDefaults.standard.string(forKey: "givenName") {  // 구글로그인 상태일때
+        if UserDefaults.standard.object(forKey: "userId") != nil || UserDefaults.standard.object(forKey: "appleUserId") != nil{    // 로그인 상태일 때
+            if let givenName = UserDefaults.standard.string(forKey: "givenName") {  // 구글 or 애플 로그인 상태일때
                 btnProfile.setTitle(givenName, for: .normal)
             } else {
                 if var email = UserDefaults.standard.object(forKey: "emailAddress") {   // 자체로그인 상태일때
@@ -73,6 +73,8 @@ class BaseViewController: UIViewController {
                     var tokens = emailString.components(separatedBy: "@")
                     let IdFromEmail = tokens[0]
                     btnProfile.setTitle(IdFromEmail, for: .normal)
+                } else {
+                    btnProfile.setTitle("이름 없는 사용자", for: .normal)
                 }
             }
         } else {    // 로그아웃 상태일 때
@@ -177,7 +179,7 @@ class BaseViewController: UIViewController {
     
     @IBAction func btnProfileClicked(_ sender: UIButton?) {
         
-        if UserDefaults.standard.object(forKey: "userId") != nil { //로그인 상태일때
+        if UserDefaults.standard.object(forKey: "userId") != nil || UserDefaults.standard.object(forKey: "appleUserId") != nil{ //로그인 상태일때
             // dropdown 메뉴에 sign out 나오게
             let dropdown = DropDown()
             let itemList = ["Sign Out"]
@@ -188,21 +190,25 @@ class BaseViewController: UIViewController {
             // Item 선택 시 처리
             dropdown.selectionAction = { [weak self] (index, item) in
                 if item == "Sign Out" {     //로그아웃 처리
-                    let firebaseAuth = Auth.auth()
-                    do {
-                        try firebaseAuth.signOut()
-                        // 저장된 유저 정보 초기화
-                        UserDefaults.standard.set(nil, forKey: "userId")
-                        UserDefaults.standard.set(nil, forKey: "emailAddress")
-                        UserDefaults.standard.set(nil, forKey: "fullName")
-                        UserDefaults.standard.set(nil, forKey: "givenName")
-                        UserDefaults.standard.set(nil, forKey: "familyName")
-                        UserDefaults.standard.set(nil, forKey: "profilePicUrl")
-                    } catch let signOutError as NSError {
-                        print("로그아웃 Error발생:", signOutError)
+                    if UserDefaults.standard.object(forKey: "appleUserId") != nil { // 애플로그인 상태일 경우
+                        self?.popAlert(title: "Please Sign out from the path below.", message: "Settings > [User Name] > Password & Security > Apps Using Apple ID > Stop Using Apple ID")
+                    } else {
+                        let firebaseAuth = Auth.auth()
+                        do {
+                            try firebaseAuth.signOut()
+                            // 저장된 유저 정보 초기화
+                            UserDefaults.standard.set(nil, forKey: "userId")
+                            UserDefaults.standard.set(nil, forKey: "emailAddress")
+                            UserDefaults.standard.set(nil, forKey: "fullName")
+                            UserDefaults.standard.set(nil, forKey: "givenName")
+                            UserDefaults.standard.set(nil, forKey: "familyName")
+                            UserDefaults.standard.set(nil, forKey: "profilePicUrl")
+                        } catch let signOutError as NSError {
+                            print("로그아웃 Error발생:", signOutError)
+                        }
+                        // 모든 탭화면 초기화.
+                        self!.initTabs()
                     }
-                    // 모든 탭화면 초기화.
-                    self!.initTabs()
                 }
             }
             // 취소 시 처리

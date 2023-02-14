@@ -17,7 +17,6 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var tfEmail: UITextField!
     @IBOutlet weak var tfPassword: UITextField!
     @IBOutlet weak var btnSignUp: UIButton!
-
     @IBOutlet weak var svSocialLogin: UIStackView!
     
     override func viewDidLoad() {
@@ -130,25 +129,6 @@ class LoginViewController: BaseViewController {
         }
     }
     
-    
-    @IBAction func btnSignOutTouched(_ sender: Any) {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            // 저장된 유저 정보 초기화
-            UserDefaults.standard.set(nil, forKey: "userId")
-            UserDefaults.standard.set(nil, forKey: "emailAddress")
-            UserDefaults.standard.set(nil, forKey: "fullName")
-            UserDefaults.standard.set(nil, forKey: "givenName")
-            UserDefaults.standard.set(nil, forKey: "familyName")
-            UserDefaults.standard.set(nil, forKey: "profilePicUrl")
-        } catch let signOutError as NSError {
-            print("로그아웃 Error발생:", signOutError)
-        }
-        
-        self.dismiss(animated: false)
-    }
-    
     @IBAction func btnBackTouched(_ sender: Any) {
         self.dismiss(animated: false)
     }
@@ -204,19 +184,35 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             
+            // Create an account in your system.
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
             
-            print("UserID: \(userIdentifier)")
-            print("FullName: \(fullName)")
-            print("Email: \(email)")
+            // For the purpose of this demo app, store the `userIdentifier` in the keychain.
+            // self.saveUserInKeychain(userIdentifier)
+            
+            // 사용자 정보 저장
+            let givenName = fullName?.givenName ?? ""
+            let familyName = fullName?.familyName ?? ""
+            UserDefaults.standard.set(userIdentifier , forKey: "appleUserId")
+            UserDefaults.standard.set(givenName, forKey: "givenName")
+            UserDefaults.standard.set(familyName, forKey: "familyName")
+            UserDefaults.standard.set(givenName + " " + familyName, forKey: "familyName")
+            UserDefaults.standard.set(email ?? "", forKey: "emailAddress")
+            
+            
+            self.dismiss(animated: false)
             
         case let passwordCredential as ASPasswordCredential:
-            
+            // 자격증명이 이미 등록된 경우 인 것 같음.
+            // Sign in using an existing iCloud Keychain credential.
             let username = passwordCredential.user
             let password = passwordCredential.password
-                        
+            
+            // For the purpose of this demo app, show the password credential as an alert.
+            print("existing iCloud Keychain credential")
+            
         default:
             break
         }
@@ -224,5 +220,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // 에러 처리
+        print("애플로그인 에러: \(error)")
     }
 }
