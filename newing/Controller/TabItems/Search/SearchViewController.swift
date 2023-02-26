@@ -118,23 +118,28 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let articleVC = self.storyboard?.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController else { return }
+//        guard let articleVC = self.storyboard?.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController else { return }
+//
+//        let article = articles[indexPath.row]
+//        articleVC.urlStr = article.link!
+//        articleVC.articleTitle = article.title!
+//        articleVC.source = article.source!
+//        articleVC.date = article.pubDate
+//        //date to string
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.locale = Locale(identifier: "en")
+//        dateFormatter.dateFormat = "dd MMM yyyy"
+//        let dateStr = dateFormatter.string(from: article.pubDate!)
+//        articleVC.dateStr = dateStr
+//
+//        // 전환된 화면이 보여지는 방법 설정 (fullScreen)
+//        articleVC.modalPresentationStyle = .fullScreen
+//        self.present(articleVC, animated: false, completion: nil)
         
         let article = articles[indexPath.row]
-        articleVC.urlStr = article.link!
-        articleVC.articleTitle = article.title!
-        articleVC.source = article.source!
-        articleVC.date = article.pubDate
-        //date to string
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en")
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        let dateStr = dateFormatter.string(from: article.pubDate!)
-        articleVC.dateStr = dateStr
-        
-        // 전환된 화면이 보여지는 방법 설정 (fullScreen)
-        articleVC.modalPresentationStyle = .fullScreen
-        self.present(articleVC, animated: false, completion: nil)
+        if let articleUrl = URL(string: article.link!) {
+            UIApplication.shared.open(articleUrl)
+        }
     }
 }
 

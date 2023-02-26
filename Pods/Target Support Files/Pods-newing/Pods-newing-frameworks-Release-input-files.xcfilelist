@@ -21,6 +21,7 @@ ${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
 ${BUILT_PRODUCTS_DIR}/Libuv-gRPC/uv.framework
 ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
 ${BUILT_PRODUCTS_DIR}/ReadabilityKit/ReadabilityKit.framework
+${BUILT_PRODUCTS_DIR}/SafeAreaBrush/SafeAreaBrush.framework
 ${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework
 ${BUILT_PRODUCTS_DIR}/Untagger/Untagger.framework
 ${BUILT_PRODUCTS_DIR}/abseil/absl.framework

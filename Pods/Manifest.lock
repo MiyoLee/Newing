@@ -782,6 +782,7 @@ PODS:
   - PromisesObjC (2.1.1)
   - ReadabilityKit (0.7.4):
     - Ji (= 5.0.0)
+  - SafeAreaBrush (1.0.4)
   - SwiftSoup (2.4.3)
   - Untagger (0.0.4)
 
@@ -796,6 +797,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - Kingfisher
   - ReadabilityKit
+  - SafeAreaBrush
   - SwiftSoup
   - Untagger
 
@@ -830,6 +832,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - ReadabilityKit
+    - SafeAreaBrush
     - SwiftSoup
     - Untagger
 
@@ -863,9 +866,10 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   ReadabilityKit: 09e8b2ecb3d06f17f4c856e426c34f9016e86e6f
+  SafeAreaBrush: 282315ce500e436c04b2c26b46e8ac0ad4288bbd
   SwiftSoup: 3384f2e618cfc1b3cbc7852c16692fe8de13fb8f
   Untagger: 37cd7483949e7abe21630bda4474013fc0d8174f
 
-PODFILE CHECKSUM: 06c077d74e2559a37c1230e22caeb31b442b88b1
+PODFILE CHECKSUM: c437aebd2badcde9868d2e1cd0b294c47327bbe4
 
 COCOAPODS: 1.11.3

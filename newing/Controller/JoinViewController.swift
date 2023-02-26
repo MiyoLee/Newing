@@ -15,7 +15,7 @@ class JoinViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addHeader(type: 3)
     }
     
     
@@ -27,14 +27,12 @@ class JoinViewController: BaseViewController {
                 }
                 print("createUser 결과: \(authResult)")
                 // 회원가입 성공 alert
-                self.popAlert(title: "Thank you!", message: "Sign up is Complete.\nPlease Sign in.")
+                self.popAlert(title: "Thank you!", message: "Sign up is Complete.\nPlease Sign in.") {
+                    self.dismiss(animated: false)
+                }
             }
         } else {
             print("Invalid email or password")
         }
-    }
-    
-    @IBAction func btnBackTouched(_ sender: Any) {
-        self.dismiss(animated: false)
     }
 }

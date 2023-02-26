@@ -19,6 +19,7 @@
 		D31B724828EC2CB200407D82 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B724728EC2CB200407D82 /* FavoriteViewController.swift */; };
 		D31C3CDB295D792600EA784D /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C3CDA295D792600EA784D /* FavoriteTableViewCell.swift */; };
 		D31C3CF32963C38100EA784D /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C3CF22963C38100EA784D /* UITextField.swift */; };
+		D3305707299B720700442BE7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3305706299B720700442BE7 /* Constants.swift */; };
 		D3779EAA28F6973200C2BFA4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D3779EA928F6973200C2BFA4 /* FirebaseAnalytics */; };
 		D384AC222954662F00FE1377 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3779EA628F695D800C2BFA4 /* GoogleService-Info.plist */; };
 		D384AC24295539B000FE1377 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384AC23295539B000FE1377 /* JoinViewController.swift */; };
@@ -53,6 +54,7 @@
 		D31B724728EC2CB200407D82 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		D31C3CDA295D792600EA784D /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		D31C3CF22963C38100EA784D /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		D3305706299B720700442BE7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D3779EA628F695D800C2BFA4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D384AC192951959100FE1377 /* newing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = newing.entitlements; sourceTree = "<group>"; };
 		D384AC23295539B000FE1377 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		D31B722F28EC273900407D82 /* newing */ = {
 			isa = PBXGroup;
 			children = (
+				D3305705299B71E200442BE7 /* Common */,
 				D3C1C567295C1E7E00CC15CB /* App */,
 				D3C1C566295C1E3800CC15CB /* Controller */,
 				D3C1C561295C1C7700CC15CB /* Extension */,
@@ -137,6 +140,14 @@
 				D3D44B95294715EF00AEC435 /* ArticleViewController.swift */,
 			);
 			path = TabItems;
+			sourceTree = "<group>";
+		};
+		D3305705299B71E200442BE7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D3305706299B720700442BE7 /* Constants.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		D3C1C558295C05A400CC15CB /* Model */ = {
@@ -347,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3C1C55A295C17AE00CC15CB /* Article.swift in Sources */,
+				D3305707299B720700442BE7 /* Constants.swift in Sources */,
 				D3D094D4294EE29700A9D7B9 /* LoginViewController.swift in Sources */,
 				D31B724628EC2C9D00407D82 /* HeadlineViewController.swift in Sources */,
 				D31C3CDB295D792600EA784D /* FavoriteTableViewCell.swift in Sources */,
@@ -516,7 +528,7 @@
 				CODE_SIGN_ENTITLEMENTS = newing/newing.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5XDH28DGCQ;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -552,7 +564,7 @@
 				CODE_SIGN_ENTITLEMENTS = newing/newing.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5XDH28DGCQ;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;

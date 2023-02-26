@@ -21,6 +21,7 @@ pod 'FirebaseFirestore'
 pod 'FirebaseFirestoreSwift'
 
 pod 'DropDown'
+pod 'SafeAreaBrush'
  # Pods for SignInWithGoogle_Example
 
 

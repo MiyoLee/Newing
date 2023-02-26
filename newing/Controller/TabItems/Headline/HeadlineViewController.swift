@@ -40,21 +40,25 @@ class HeadlineViewController: BaseViewController {
     }
     
     func loadArticles(){
+        let sources = ["CNN", "techcrunch"]
         let url = "https://newsapi.org/v2/top-headlines"
-        let query = ["country": "us", "pageSize": 20, "page": 1] as [String : Any]
-        let header: HTTPHeaders = ["X-Api-Key": "b0657dfc92ca47c487809bf6e1966745"]
+        for s in sources {
+            let query = ["sources": s] as [String : Any]
+            let header: HTTPHeaders = ["X-Api-Key": "b0657dfc92ca47c487809bf6e1966745"]
+            
+            AF.request(url, method: .get, parameters: query, headers: header)
+                .responseDecodable(completionHandler: { [weak self] (response: DataResponse<ArticleList, AFError>) in
+                    switch (response.result) {
+                    case .success(let data):
+                        NSLog("data : \(data)")
+                        self?.articles.append(contentsOf: data.articles)
+                        self?.tvArticles.reloadData()
+                    default:
+                        NSLog("response: \(response)")
+                    }
+                })
+        }
         
-        AF.request(url, method: .get, parameters: query, headers: header)
-            .responseDecodable(completionHandler: { [weak self] (response: DataResponse<ArticleList, AFError>) in
-                switch (response.result) {
-                case .success(let data):
-                    NSLog("data : \(data)")
-                    self?.articles = data.articles
-                    self?.tvArticles.reloadData()
-                default:
-                    NSLog("response: \(response)")
-                }
-            })
     }
 }
 

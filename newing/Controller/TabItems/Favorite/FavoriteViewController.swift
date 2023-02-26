@@ -49,7 +49,7 @@ class FavoriteViewController: BaseViewController {
     func loadSavedArticles() {
         var tmpSavedArticles: [Article] = []
         
-        if let currentUserId = UserDefaults.standard.string(forKey: "userId"), !currentUserId.isEmpty {
+        if let currentUserId = UserDefaults.standard.string(forKey: Constants.USER_ID), !currentUserId.isEmpty {
             db.collection("saved_article").whereField("userId", isEqualTo: currentUserId).order(by: "dateTime", descending: true)
                 .getDocuments() { [weak self] (querySnapshot, err) in
                     if let err = err {

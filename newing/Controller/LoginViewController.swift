@@ -9,21 +9,25 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import AuthenticationServices
+import CryptoKit
 
 class LoginViewController: BaseViewController {
     
-
+    
     @IBOutlet weak var vSignIn: UIView!
     @IBOutlet weak var tfEmail: UITextField!
     @IBOutlet weak var tfPassword: UITextField!
     @IBOutlet weak var btnSignUp: UIButton!
     @IBOutlet weak var svSocialLogin: UIStackView!
     
+    fileprivate var currentNonce: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addHeader(type: 3)
         setUpView()
     }
-   
+    
     
     
     func setUpView() {
@@ -38,7 +42,7 @@ class LoginViewController: BaseViewController {
         tfPassword.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemIndigo])
         
         // 버튼 노출 세팅
-        if UserDefaults.standard.object(forKey: "userId") != nil {    // 로그인 상태
+        if UserDefaults.standard.object(forKey: Constants.USER_ID) != nil {    // 로그인 상태
             vSignIn.isHidden = true
             btnSignUp.isHidden = true
             svSocialLogin.isHidden = true
@@ -72,23 +76,22 @@ class LoginViewController: BaseViewController {
         btnAppleSignIn.widthAnchor.constraint(equalToConstant: 194).isActive = true
         
         // 버튼 눌렀을 때 처리할 메서드 추가
-        btnAppleSignIn.addTarget(self, action: #selector(handleAuthorizationAppleIDBtnPressed), for: .touchUpInside)
+        btnAppleSignIn.addTarget(self, action: #selector(startSignInWithAppleFlow), for: .touchUpInside)
         
     }
     
     // 인증을 처리할 메서드
-    @objc
-    func handleAuthorizationAppleIDBtnPressed() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        // 이름과 이메일 요청
-        request.requestedScopes = [.fullName, .email]
-     
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
-    }
+//    @objc func handleAuthorizationAppleIDBtnPressed() {
+//        let appleIDProvider = ASAuthorizationAppleIDProvider()
+//        let request = appleIDProvider.createRequest()
+//        // 이름과 이메일 요청
+//        request.requestedScopes = [.fullName, .email]
+//
+//        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+//        authorizationController.delegate = self
+//        authorizationController.presentationContextProvider = self
+//        authorizationController.performRequests()
+//    }
     
     @objc func handleGoogleSignIn(_ sender: Any) {
         
@@ -114,13 +117,13 @@ class LoginViewController: BaseViewController {
                 // 사용자 등록 후에 처리할 코드
                 guard let userId = Auth.auth().currentUser?.uid else { return }
                 // firebase userId 저장
-                UserDefaults.standard.set(userId, forKey: "userId")
+                UserDefaults.standard.set(userId, forKey: Constants.USER_ID)
                 // google 프로필 정보 저장
-                UserDefaults.standard.set(user!.profile?.email, forKey: "emailAddress")
-                UserDefaults.standard.set(user!.profile?.name, forKey: "fullName")
-                UserDefaults.standard.set(user!.profile?.givenName, forKey: "givenName")
-                UserDefaults.standard.set(user!.profile?.familyName, forKey: "familyName")
-                UserDefaults.standard.set(user!.profile?.imageURL(withDimension: 320), forKey: "profilePicUrl")
+                UserDefaults.standard.set(user!.profile?.email, forKey: Constants.EMAIL_ADDRESS)
+                UserDefaults.standard.set(user!.profile?.name, forKey: Constants.FULL_NAME)
+                UserDefaults.standard.set(user!.profile?.givenName, forKey: Constants.GIVEN_NAME)
+                UserDefaults.standard.set(user!.profile?.familyName, forKey: Constants.FAMILY_NAME)
+                UserDefaults.standard.set(user!.profile?.imageURL(withDimension: 320), forKey: Constants.PROFILE_PIC_URL)
                 
                 // 로그인 창 닫기
                 self.dismiss(animated: false)
@@ -129,7 +132,7 @@ class LoginViewController: BaseViewController {
         }
     }
     
-    @IBAction func btnBackTouched(_ sender: Any) {
+    @IBAction func btnBackClicked(_ sender: Any) {
         self.dismiss(animated: false)
     }
     
@@ -137,24 +140,32 @@ class LoginViewController: BaseViewController {
         if let email = tfEmail.text, let password = tfPassword.text {
             Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
                 // guard let strongSelf = self else { return }
-                guard error == nil else {
+                if error != nil {
                     print(error!)
-                    return
+                    self?.popAlert(title: "Sign in failed.", message: error?.localizedDescription){
+                        
+                    }
+                } else {
+                    // UserDefaults 초기화
+                    for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                        UserDefaults.standard.removeObject(forKey: key.description)
+                    }
+                    // UserDefaults에 로그인 정보 저장
+                    if let userId = authResult?.user.uid {
+                        UserDefaults.standard.set(userId, forKey: Constants.USER_ID)
+                    }
+                    UserDefaults.standard.set(email, forKey: Constants.EMAIL_ADDRESS)
+                    UserDefaults.standard.set(nil, forKey: Constants.FULL_NAME)
+                    UserDefaults.standard.set(nil, forKey: Constants.GIVEN_NAME)
+                    UserDefaults.standard.set(nil, forKey: Constants.FAMILY_NAME)
+                    UserDefaults.standard.set(nil, forKey: Constants.PROFILE_PIC_URL)
+                    
+                    self?.dismiss(animated: false)
                 }
-                if let userId = authResult?.user.uid {
-                    UserDefaults.standard.set(userId, forKey: "userId")
-                }
-                UserDefaults.standard.set(email, forKey: "emailAddress")
-                UserDefaults.standard.set(nil, forKey: "fullName")
-                UserDefaults.standard.set(nil, forKey: "givenName")
-                UserDefaults.standard.set(nil, forKey: "familyName")
-                UserDefaults.standard.set(nil, forKey: "profilePicUrl")
-                
-                self?.dismiss(animated: false)
             }
             
         } else {
-            print("email, password 모두 입력해주세요.")
+            print("Please enter both email and password.")
         }
     }
     
@@ -171,6 +182,65 @@ class LoginViewController: BaseViewController {
     }
 }
 
+// Apple 로그인 관련...
+extension LoginViewController {
+    @objc func startSignInWithAppleFlow() {
+        let nonce = randomNonceString()
+        currentNonce = nonce
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        request.nonce = sha256(nonce)
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
+    private func sha256(_ input: String) -> String {
+        let inputData = Data(input.utf8)
+        let hashedData = SHA256.hash(data: inputData)
+        let hashString = hashedData.compactMap {
+            return String(format: "%02x", $0)
+        }.joined()
+        
+        return hashString
+    }
+    
+    private func randomNonceString(length: Int = 32) -> String {
+        precondition(length > 0)
+        let charset: Array<Character> =
+        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        var result = ""
+        var remainingLength = length
+        
+        while remainingLength > 0 {
+            let randoms: [UInt8] = (0 ..< 16).map { _ in
+                var random: UInt8 = 0
+                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                if errorCode != errSecSuccess {
+                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+                }
+                return random
+            }
+            
+            randoms.forEach { random in
+                if remainingLength == 0 {
+                    return
+                }
+                
+                if random < charset.count {
+                    result.append(charset[Int(random)])
+                    remainingLength -= 1
+                }
+            }
+        }
+        
+        return result
+    }
+}
+
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
@@ -180,46 +250,54 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
 extension LoginViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-        
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            guard let nonce = currentNonce else {
+                fatalError("Invalid state: A login callback was received, but no login request was sent.")
+            }
+            guard let appleIDToken = appleIDCredential.identityToken else {
+                print("Unable to fetch identity token")
+                return
+            }
+            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                return
+            }
             
-            // Create an account in your system.
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
+            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
             
-            // For the purpose of this demo app, store the `userIdentifier` in the keychain.
-            // self.saveUserInKeychain(userIdentifier)
-            
-            // 사용자 정보 저장
-            let givenName = fullName?.givenName ?? ""
-            let familyName = fullName?.familyName ?? ""
-            UserDefaults.standard.set(userIdentifier , forKey: "appleUserId")
-            UserDefaults.standard.set(givenName, forKey: "givenName")
-            UserDefaults.standard.set(familyName, forKey: "familyName")
-            UserDefaults.standard.set(givenName + " " + familyName, forKey: "familyName")
-            UserDefaults.standard.set(email ?? "", forKey: "emailAddress")
-            
-            
-            self.dismiss(animated: false)
-            
-        case let passwordCredential as ASPasswordCredential:
-            // 자격증명이 이미 등록된 경우 인 것 같음.
-            // Sign in using an existing iCloud Keychain credential.
-            let username = passwordCredential.user
-            let password = passwordCredential.password
-            
-            // For the purpose of this demo app, show the password credential as an alert.
-            print("existing iCloud Keychain credential")
-            
-        default:
-            break
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    print ("Error Apple sign in: %@", error)
+                    return
+                }
+                
+                guard let userId = Auth.auth().currentUser?.uid else { return }
+                
+                // User is signed in to Firebase with Apple.
+                let userIdentifier = appleIDCredential.user
+                let fullName = appleIDCredential.fullName
+                let email = appleIDCredential.email
+                
+                let givenName = fullName?.givenName ?? ""
+                let familyName = fullName?.familyName ?? ""
+                
+                for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                    UserDefaults.standard.removeObject(forKey: key.description)
+                }
+                UserDefaults.standard.set(userId,forKey: Constants.USER_ID)
+                UserDefaults.standard.set(userIdentifier , forKey: Constants.APPLE_USER_ID)
+                UserDefaults.standard.set(givenName, forKey: Constants.GIVEN_NAME)
+                UserDefaults.standard.set(familyName, forKey: Constants.FAMILY_NAME)
+                UserDefaults.standard.set(givenName + " " + familyName, forKey: Constants.FULL_NAME)
+                UserDefaults.standard.set(email ?? "", forKey: Constants.EMAIL_ADDRESS)
+                
+                self.dismiss(animated: false)
+            }
         }
     }
-    
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // 에러 처리
-        print("애플로그인 에러: \(error)")
-    }
+}
+
+func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    // 에러 처리
+    print("애플로그인 에러: \(error)")
 }

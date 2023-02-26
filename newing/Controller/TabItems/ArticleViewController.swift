@@ -72,7 +72,7 @@ class ArticleViewController: BaseViewController {
         if isSaved && (documentId != nil) {  // 저장된 기사일 경우, documentId로 article 불러오기.
             loadSavedArticle(documentId!)
         } else {    // 새로 불러오는 기사일 경우.
-            userId = UserDefaults.standard.object(forKey: "userId") as? String
+            userId = UserDefaults.standard.object(forKey: Constants.USER_ID) as? String
             loadArticle()
         }
     }
@@ -161,7 +161,7 @@ class ArticleViewController: BaseViewController {
     }
     
     @IBAction func btnPlusClicked(_ sender: Any) {
-        if let userId = UserDefaults.standard.object(forKey: "userId") as? String, !userId.isEmpty {   // 로그인 상태라면
+        if let userId = UserDefaults.standard.object(forKey: Constants.USER_ID) as? String, !userId.isEmpty {   // 로그인 상태라면
             // db에 article 저장하기
             if let arti = article {
                 myFirestore.saveArticle(arti) { error in

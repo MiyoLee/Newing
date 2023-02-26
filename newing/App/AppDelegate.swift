@@ -32,30 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 애플 로그인 관련 소스. 필요 없을것 같기도 한데...
         let appleIDProvider = ASAuthorizationAppleIDProvider()
-        appleIDProvider.getCredentialState(forUserID: UserDefaults.standard.string(forKey: "appleUserId") ?? "") { (credentialState, error) in
+        appleIDProvider.getCredentialState(forUserID: UserDefaults.standard.string(forKey: Constants.APPLE_USER_ID) ?? "") { (credentialState, error) in
                 switch credentialState {
                 case .authorized:
                     print("authorized")
                     break
                 case .revoked:
                     print("revoked")
-                    UserDefaults.standard.set(nil, forKey: "appleUserId")
-                    UserDefaults.standard.set(nil, forKey: "userId")
-                    UserDefaults.standard.set(nil, forKey: "emailAddress")
-                    UserDefaults.standard.set(nil, forKey: "fullName")
-                    UserDefaults.standard.set(nil, forKey: "givenName")
-                    UserDefaults.standard.set(nil, forKey: "familyName")
-                    UserDefaults.standard.set(nil, forKey: "profilePicUrl")
+                    UserDefaults.standard.set(nil, forKey: Constants.APPLE_USER_ID)
                     break
                 case .notFound:
                     print("notFound")
-                    UserDefaults.standard.set(nil, forKey: "appleUserId")
-                    UserDefaults.standard.set(nil, forKey: "userId")
-                    UserDefaults.standard.set(nil, forKey: "emailAddress")
-                    UserDefaults.standard.set(nil, forKey: "fullName")
-                    UserDefaults.standard.set(nil, forKey: "givenName")
-                    UserDefaults.standard.set(nil, forKey: "familyName")
-                    UserDefaults.standard.set(nil, forKey: "profilePicUrl")
+                    UserDefaults.standard.set(nil, forKey: Constants.APPLE_USER_ID)
                 default:
                     break
                 }
@@ -99,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         
     }
-    
+
     
 }
 
