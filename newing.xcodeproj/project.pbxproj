@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		470A1599EB3781AD94D4108F /* Pods_newing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C417507089A285C8C5E3226E /* Pods_newing.framework */; };
+		4083EB8607543F6C8D7FC2DB /* Pods_newing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12BBAAAFAABFEB5A6A57157 /* Pods_newing.framework */; };
 		D312C5982967F227006E0868 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D312C5972967F227006E0868 /* UIViewController.swift */; };
 		D31B723128EC273900407D82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B723028EC273900407D82 /* AppDelegate.swift */; };
 		D31B723328EC273900407D82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31B723228EC273900407D82 /* SceneDelegate.swift */; };
@@ -20,7 +20,6 @@
 		D31C3CDB295D792600EA784D /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C3CDA295D792600EA784D /* FavoriteTableViewCell.swift */; };
 		D31C3CF32963C38100EA784D /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31C3CF22963C38100EA784D /* UITextField.swift */; };
 		D3305707299B720700442BE7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3305706299B720700442BE7 /* Constants.swift */; };
-		D3779EAA28F6973200C2BFA4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D3779EA928F6973200C2BFA4 /* FirebaseAnalytics */; };
 		D384AC222954662F00FE1377 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3779EA628F695D800C2BFA4 /* GoogleService-Info.plist */; };
 		D384AC24295539B000FE1377 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D384AC23295539B000FE1377 /* JoinViewController.swift */; };
 		D3C1C55A295C17AE00CC15CB /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C1C559295C17AE00CC15CB /* Article.swift */; };
@@ -35,12 +34,12 @@
 		D3C54C5528F3E6DB00F25164 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C54C5428F3E6DB00F25164 /* SearchTableViewCell.swift */; };
 		D3D094D4294EE29700A9D7B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D094D3294EE29700A9D7B9 /* LoginViewController.swift */; };
 		D3D44B96294715EF00AEC435 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D44B95294715EF00AEC435 /* ArticleViewController.swift */; };
+		D3D9DA2329FD6F2A0081A657 /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D9DA2229FD6F2A0081A657 /* JoinViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D218AEBB1834C5ADFA201D7 /* Pods-newing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newing.release.xcconfig"; path = "Target Support Files/Pods-newing/Pods-newing.release.xcconfig"; sourceTree = "<group>"; };
-		4C1455C377E354C7CD35EBD7 /* Pods-newing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newing.debug.xcconfig"; path = "Target Support Files/Pods-newing/Pods-newing.debug.xcconfig"; sourceTree = "<group>"; };
-		C417507089A285C8C5E3226E /* Pods_newing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_newing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56B9ECD8A303E172101030BC /* Pods-newing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newing.debug.xcconfig"; path = "Target Support Files/Pods-newing/Pods-newing.debug.xcconfig"; sourceTree = "<group>"; };
+		61B05553E8C4D7DEA8144684 /* Pods-newing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newing.release.xcconfig"; path = "Target Support Files/Pods-newing/Pods-newing.release.xcconfig"; sourceTree = "<group>"; };
 		D312C5972967F227006E0868 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		D31B722D28EC273900407D82 /* newing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = newing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D31B723028EC273900407D82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +69,10 @@
 		D3C54C5428F3E6DB00F25164 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		D3D094D3294EE29700A9D7B9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D3D44B95294715EF00AEC435 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		D3D9DA2229FD6F2A0081A657 /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
+		D3F00CC129F6502000AA09B5 /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3F00CC729F6528800AA09B5 /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E12BBAAAFAABFEB5A6A57157 /* Pods_newing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_newing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,19 +80,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3779EAA28F6973200C2BFA4 /* FirebaseAnalytics in Frameworks */,
-				470A1599EB3781AD94D4108F /* Pods_newing.framework in Frameworks */,
+				4083EB8607543F6C8D7FC2DB /* Pods_newing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		619B61F0ABEF4AB9D237B956 /* Pods */ = {
+		A6B41FE696B5F2D3FB4A9BCB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4C1455C377E354C7CD35EBD7 /* Pods-newing.debug.xcconfig */,
-				1D218AEBB1834C5ADFA201D7 /* Pods-newing.release.xcconfig */,
+				56B9ECD8A303E172101030BC /* Pods-newing.debug.xcconfig */,
+				61B05553E8C4D7DEA8144684 /* Pods-newing.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -99,8 +101,8 @@
 			children = (
 				D31B722F28EC273900407D82 /* newing */,
 				D31B722E28EC273900407D82 /* Products */,
-				619B61F0ABEF4AB9D237B956 /* Pods */,
 				FC36998CFC8D42511DBA6493 /* Frameworks */,
+				A6B41FE696B5F2D3FB4A9BCB /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,12 +117,14 @@
 		D31B722F28EC273900407D82 /* newing */ = {
 			isa = PBXGroup;
 			children = (
-				D3305705299B71E200442BE7 /* Common */,
 				D3C1C567295C1E7E00CC15CB /* App */,
-				D3C1C566295C1E3800CC15CB /* Controller */,
+				D3C1C558295C05A400CC15CB /* Model */,
+				D3C1C566295C1E3800CC15CB /* ViewController */,
+				D3D9DA2029FD6D960081A657 /* ViewModel */,
+				D3D9DA2129FD6DC40081A657 /* Services */,
+				D3305705299B71E200442BE7 /* Common */,
 				D3C1C561295C1C7700CC15CB /* Extension */,
 				D3C1C55B295C1A3F00CC15CB /* Module */,
-				D3C1C558295C05A400CC15CB /* Model */,
 				D384AC192951959100FE1377 /* newing.entitlements */,
 				D3779EA628F695D800C2BFA4 /* GoogleService-Info.plist */,
 				D31B723628EC273900407D82 /* Main.storyboard */,
@@ -179,7 +183,7 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		D3C1C566295C1E3800CC15CB /* Controller */ = {
+		D3C1C566295C1E3800CC15CB /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				D384AC23295539B000FE1377 /* JoinViewController.swift */,
@@ -187,7 +191,7 @@
 				D3C54C4E28F2F0B000F25164 /* BaseViewController.swift */,
 				D31B724428EC2A4700407D82 /* TabItems */,
 			);
-			path = Controller;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		D3C1C567295C1E7E00CC15CB /* App */ = {
@@ -227,10 +231,27 @@
 			path = Favorite;
 			sourceTree = "<group>";
 		};
+		D3D9DA2029FD6D960081A657 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D3D9DA2229FD6F2A0081A657 /* JoinViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D3D9DA2129FD6DC40081A657 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		FC36998CFC8D42511DBA6493 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C417507089A285C8C5E3226E /* Pods_newing.framework */,
+				D3F00CC729F6528800AA09B5 /* FirebaseCore.framework */,
+				D3F00CC129F6502000AA09B5 /* FirebaseAuth.framework */,
+				E12BBAAAFAABFEB5A6A57157 /* Pods_newing.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -242,20 +263,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D31B724128EC273A00407D82 /* Build configuration list for PBXNativeTarget "newing" */;
 			buildPhases = (
-				70AAA947C8F32E9D3C16F5DB /* [CP] Check Pods Manifest.lock */,
+				AEF065A9B2884161CCCBD18F /* [CP] Check Pods Manifest.lock */,
 				D31B722928EC273900407D82 /* Sources */,
 				D31B722A28EC273900407D82 /* Frameworks */,
 				D31B722B28EC273900407D82 /* Resources */,
-				8DB88F60B0490AC37221E849 /* [CP] Embed Pods Frameworks */,
+				885F43F668935D5C8ED99E5D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = newing;
-			packageProductDependencies = (
-				D3779EA928F6973200C2BFA4 /* FirebaseAnalytics */,
-			);
 			productName = newing;
 			productReference = D31B722D28EC273900407D82 /* newing.app */;
 			productType = "com.apple.product-type.application";
@@ -311,7 +329,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		70AAA947C8F32E9D3C16F5DB /* [CP] Check Pods Manifest.lock */ = {
+		885F43F668935D5C8ED99E5D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-newing/Pods-newing-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-newing/Pods-newing-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-newing/Pods-newing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AEF065A9B2884161CCCBD18F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -333,23 +368,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8DB88F60B0490AC37221E849 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-newing/Pods-newing-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-newing/Pods-newing-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-newing/Pods-newing-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -367,6 +385,7 @@
 				D3C54C4B28F2D9FC00F25164 /* UIColor.swift in Sources */,
 				D31B723128EC273900407D82 /* AppDelegate.swift in Sources */,
 				D3C1C55D295C1A4E00CC15CB /* MyFirestore.swift in Sources */,
+				D3D9DA2329FD6F2A0081A657 /* JoinViewModel.swift in Sources */,
 				D384AC24295539B000FE1377 /* JoinViewController.swift in Sources */,
 				D3D44B96294715EF00AEC435 /* ArticleViewController.swift in Sources */,
 				D31C3CF32963C38100EA784D /* UITextField.swift in Sources */,
@@ -442,7 +461,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -501,7 +520,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -520,7 +539,7 @@
 		};
 		D31B724228EC273A00407D82 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4C1455C377E354C7CD35EBD7 /* Pods-newing.debug.xcconfig */;
+			baseConfigurationReference = 56B9ECD8A303E172101030BC /* Pods-newing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -556,7 +575,7 @@
 		};
 		D31B724328EC273A00407D82 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D218AEBB1834C5ADFA201D7 /* Pods-newing.release.xcconfig */;
+			baseConfigurationReference = 61B05553E8C4D7DEA8144684 /* Pods-newing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -623,14 +642,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		D3779EA928F6973200C2BFA4 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D3779EA828F6973200C2BFA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D31B722528EC273900407D82 /* Project object */;
 }

@@ -1,6 +1,12 @@
 
 import Foundation
 
+struct ArticleResponse: Codable {
+    let status: String
+    let totalResults: Int
+    let articles: [Article]
+}
+
 struct Article: Codable {
     var documentId: String?
     let userId: String?
@@ -11,8 +17,6 @@ struct Article: Codable {
     var urlToImage: String?
     var content: String?
     var userMemo: String?
-//    let author: String?
-//    let description: String?
     
     init( userId: String?, title: String?, source: String?, date: String?, url: String?, urlToImage: String?, content: String?) {
         self.documentId = nil
@@ -24,8 +28,6 @@ struct Article: Codable {
         self.urlToImage = urlToImage
         self.content = content
         self.userMemo = nil
-//        self.author = ""
-//        self.description = ""
     }
     
     
@@ -39,8 +41,6 @@ struct Article: Codable {
         case urlToImage
         case content
         case userMemo
-//        case author
-//        case description
     }
     
 }

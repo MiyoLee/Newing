@@ -116,9 +116,6 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (instancetype)firestore {
-  if ([FIRApp defaultApp] == nil) { //22.12.23 추가함
-          [FIRApp configure];
-  }
   FIRApp *app = [FIRApp defaultApp];
   if (!app) {
     ThrowIllegalState("Failed to get FirebaseApp instance. Please call FirebaseApp.configure() "
@@ -546,6 +543,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)terminateInternalWithCompletion:(nullable void (^)(NSError *_Nullable error))completion {
   _firestore->Terminate(MakeCallback(completion));
+}
+
+#pragma mark - Force Link Unreferenced Symbols
+
+extern void FSTIncludeFSTFirestoreComponent(void);
+
+/// This method forces the linker to include all the Analytics categories without requiring app
+/// developers to include the '-ObjC' linker flag in their projects. DO NOT CALL THIS METHOD.
++ (void)notCalled {
+  NSAssert(NO, @"+notCalled should never be called");
+  FSTIncludeFSTFirestoreComponent();
 }
 
 @end

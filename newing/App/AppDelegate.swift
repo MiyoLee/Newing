@@ -8,6 +8,8 @@
 import UIKit
 import GoogleSignIn
 import FirebaseCore
+import FirebaseAnalytics
+import FirebaseAuth
 import AuthenticationServices
 
 @UIApplicationMain
@@ -71,16 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: UISceneSession Lifecycle
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        
-        // rootViewController 설정
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let headlineViewController = storyboard.instantiateViewController(withIdentifier: "HeadlineVC") as! HeadlineViewController
-//
-//        window?.rootViewController = headlineViewController
-//        window?.makeKeyAndVisible()
-        
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     

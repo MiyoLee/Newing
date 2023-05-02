@@ -7,7 +7,9 @@
 
 import UIKit
 import DropDown
-import Firebase
+import FirebaseCore
+import FirebaseAnalytics
+import FirebaseAuth
 import GoogleSignIn
 import AuthenticationServices
 import SafeAreaBrush
@@ -19,6 +21,8 @@ class BaseViewController: UIViewController {
     var btnProfile = UIButton()
     var btnBack = UIButton()
     var btnGoLink = UIButton()
+    
+    let joinViewModel = JoinViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,7 +189,7 @@ class BaseViewController: UIViewController {
         if UserDefaults.standard.object(forKey: Constants.USER_ID) != nil || UserDefaults.standard.object(forKey: Constants.APPLE_USER_ID) != nil{ //로그인 상태일때
             // dropdown 메뉴에 sign out 나오게
             let dropdown = DropDown()
-            let itemList = ["Sign Out"]
+            let itemList = ["Sign Out", "Delete Account"]
             dropdown.dataSource = itemList
             dropdown.anchorView = btnProfile
             dropdown.bottomOffset = CGPoint(x: 0, y: btnProfile.bounds.height)
@@ -193,23 +197,32 @@ class BaseViewController: UIViewController {
             // Item 선택 시 처리
             dropdown.selectionAction = { [weak self] (index, item) in
                 if item == "Sign Out" {     //로그아웃 처리
-                    if UserDefaults.standard.object(forKey: Constants.APPLE_USER_ID) != nil { // 애플로그인 상태일 경우
-                        self?.popAlert(title: "Please Sign out from the path below.", message: "Settings > [User Name] > Password & Security > Apps Using Apple ID > Stop Using Apple ID") {
-                            
+                    self?.joinViewModel.signOut(){ isApple, error in
+                        if error != nil {
+                            self?.popAlert(title: "Error", message: "Failed to sign out. Please try again."){}
+                        } else if isApple {
+                            self?.popAlert(title: "Please Sign out from the path below.", message: "Settings > [User Name] > Password & Security > Apps Using Apple ID > Stop Using Apple ID") {}
+                        } else {
+                            self!.initTabs()
                         }
-                    } else {
-                        let firebaseAuth = Auth.auth()
-                        do {
-                            try firebaseAuth.signOut()
-                            // 저장된 유저 정보 초기화
-                            for key in UserDefaults.standard.dictionaryRepresentation().keys {
-                                UserDefaults.standard.removeObject(forKey: key.description)
+                    }
+                    
+                } else if item == "Delete Account" {
+                    self?.popConfirm(title: "Delete Account", message: "Are you sure you want to delete your account?") {
+                        // 탈퇴. 계정 삭제 진행
+                        self?.joinViewModel.deleteAccount(){ error in
+                            if error != nil {
+                                self?.joinViewModel.reauthenticate()
+                                self?.popAlert(title: "Error", message: "Failed to delete your account. Please try again."){}
+                            } else {
+                                self?.popAlert(title: "Success", message: "Your account has been deleted."){
+                                    //로그아웃
+                                    self?.joinViewModel.signOut(){ isApple, error in
+                                        self!.initTabs()
+                                    }
+                                }
                             }
-                        } catch let signOutError as NSError {
-                            print("로그아웃 Error발생:", signOutError)
                         }
-                        // 모든 탭화면 초기화.
-                        self!.initTabs()
                     }
                 }
             }
@@ -260,10 +273,10 @@ class BaseViewController: UIViewController {
     func popConfirm(title: String?, message: String?, actionForYes: @escaping () -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .default) { action in
-          //취소처리. 아무것도 안함.
+            //취소처리. 아무것도 안함.
         })
         alert.addAction(UIAlertAction(title: "Yes", style: .default) { action in
-          //확인처리
+            //확인처리
             actionForYes()
         })
         self.present(alert, animated: true, completion: nil)

@@ -12,8 +12,7 @@ class HeadlineViewController: BaseViewController {
 
     @IBOutlet weak var tvArticles: UITableView!
   
-    
-    var articles: [Article] = []
+    let viewModel = ArticleViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,11 +46,11 @@ class HeadlineViewController: BaseViewController {
             let header: HTTPHeaders = ["X-Api-Key": "b0657dfc92ca47c487809bf6e1966745"]
             
             AF.request(url, method: .get, parameters: query, headers: header)
-                .responseDecodable(completionHandler: { [weak self] (response: DataResponse<ArticleList, AFError>) in
+                .responseDecodable(completionHandler: { [weak self] (response: DataResponse<ArticleResponse, AFError>) in
                     switch (response.result) {
                     case .success(let data):
                         NSLog("data : \(data)")
-                        self?.articles.append(contentsOf: data.articles)
+                        self?.viewModel.articleList.append(contentsOf: data.articles)
                         self?.tvArticles.reloadData()
                     default:
                         NSLog("response: \(response)")
@@ -65,7 +64,7 @@ class HeadlineViewController: BaseViewController {
 extension HeadlineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
+        return viewModel.numOfArticle
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -74,7 +73,7 @@ extension HeadlineViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HeadLineCell") as! HeadlineTableViewCell
-        var article = articles[indexPath.row]
+        var article = viewModel.articleList[indexPath.row]
         let title = article.title
         let source = article.source?.name
         var dateStr = article.publishedAt
@@ -90,7 +89,7 @@ extension HeadlineViewController: UITableViewDelegate, UITableViewDataSource {
             dateStr = dateFormatter.string(from: date!)   // date to string
         }
         
-        articles[indexPath.row].publishedAt = dateStr // set publishedAt
+        viewModel.articleList[indexPath.row].publishedAt = dateStr // set publishedAt
         // date 형식 변경 end
         
         let urlToImage = article.urlToImage
@@ -105,7 +104,7 @@ extension HeadlineViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let articleVC = self.storyboard?.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController else { return }
         
-        let article = articles[indexPath.row]
+        let article = viewModel.articleList[indexPath.row]
         articleVC.urlStr = article.url!
         articleVC.articleTitle = article.title!
         articleVC.source = (article.source?.name)!
@@ -118,8 +117,15 @@ extension HeadlineViewController: UITableViewDelegate, UITableViewDataSource {
    
 }
 
-struct ArticleList: Codable {
-    let status: String
-    let totalResults: Int
-    let articles: [Article]
+// ViewModel
+class ArticleViewModel {
+    var articleList: [Article] = []
+    
+    var numOfArticle: Int {
+        return articleList.count
+    }
+    
+    func article(at index: Int) -> Article {
+        return articleList[index]
+    }
 }

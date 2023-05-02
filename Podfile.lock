@@ -596,14 +596,14 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - Alamofire (5.6.2)
+  - Alamofire (5.6.4)
   - AlamofireRSSParser (4.0.0):
     - Alamofire (~> 5.5)
-  - AppAuth (1.6.0):
-    - AppAuth/Core (= 1.6.0)
-    - AppAuth/ExternalUserAgent (= 1.6.0)
-  - AppAuth/Core (1.6.0)
-  - AppAuth/ExternalUserAgent (1.6.0):
+  - AppAuth (1.6.1):
+    - AppAuth/Core (= 1.6.1)
+    - AppAuth/ExternalUserAgent (= 1.6.1)
+  - AppAuth/Core (1.6.1)
+  - AppAuth/ExternalUserAgent (1.6.1):
     - AppAuth/Core
   - BoringSSL-GRPC (0.0.24):
     - BoringSSL-GRPC/Implementation (= 0.0.24)
@@ -612,8 +612,8 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
   - DropDown (2.3.13)
-  - FirebaseAnalytics (10.1.0):
-    - FirebaseAnalytics/AdIdSupport (= 10.1.0)
+  - FirebaseAnalytics (10.8.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.8.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
@@ -621,29 +621,31 @@ PODS:
     - GoogleUtilities/Network (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseAnalytics/AdIdSupport (10.1.0):
+  - FirebaseAnalytics/AdIdSupport (10.8.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleAppMeasurement (= 10.1.0)
+    - GoogleAppMeasurement (= 10.8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/MethodSwizzler (~> 7.8)
     - GoogleUtilities/Network (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseAuth (10.1.0):
+  - FirebaseAppCheckInterop (10.7.0)
+  - FirebaseAuth (10.8.0):
+    - FirebaseAppCheckInterop (~> 10.0)
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
-    - GTMSessionFetcher/Core (~> 2.1)
-  - FirebaseCore (10.1.0):
+    - GTMSessionFetcher/Core (< 4.0, >= 2.1)
+  - FirebaseCore (10.8.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreExtension (10.3.0):
+  - FirebaseCoreExtension (10.8.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseCoreInternal (10.1.0):
+  - FirebaseCoreInternal (10.8.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseFirestore (10.3.0):
+  - FirebaseFirestore (10.8.0):
     - abseil/algorithm (~> 1.20211102.0)
     - abseil/base (~> 1.20211102.0)
     - abseil/container/flat_hash_map (~> 1.20211102.0)
@@ -656,59 +658,59 @@ PODS:
     - "gRPC-C++ (~> 1.44.0)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseFirestoreSwift (10.3.0):
+  - FirebaseFirestoreSwift (10.8.0):
     - FirebaseCore (~> 10.0)
     - FirebaseCoreExtension (~> 10.0)
     - FirebaseFirestore (~> 10.0)
     - FirebaseSharedSwift (~> 10.0)
-  - FirebaseInstallations (10.1.0):
+  - FirebaseInstallations (10.8.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseSharedSwift (10.3.0)
-  - GoogleAppMeasurement (10.1.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.1.0)
+  - FirebaseSharedSwift (10.8.0)
+  - GoogleAppMeasurement (10.8.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/MethodSwizzler (~> 7.8)
     - GoogleUtilities/Network (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.1.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.1.0)
+  - GoogleAppMeasurement/AdIdSupport (10.8.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/MethodSwizzler (~> 7.8)
     - GoogleUtilities/Network (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.1.0):
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.8.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/MethodSwizzler (~> 7.8)
     - GoogleUtilities/Network (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleSignIn (6.2.4):
+  - GoogleSignIn (7.0.0):
     - AppAuth (~> 1.5)
-    - GTMAppAuth (~> 1.3)
-    - GTMSessionFetcher/Core (< 3.0, >= 1.1)
-  - GoogleUtilities/AppDelegateSwizzler (7.8.0):
+    - GTMAppAuth (< 3.0, >= 1.3)
+    - GTMSessionFetcher/Core (< 4.0, >= 1.1)
+  - GoogleUtilities/AppDelegateSwizzler (7.11.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.8.0):
+  - GoogleUtilities/Environment (7.11.1):
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.8.0):
+  - GoogleUtilities/Logger (7.11.1):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (7.8.0):
+  - GoogleUtilities/MethodSwizzler (7.11.1):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (7.8.0):
+  - GoogleUtilities/Network (7.11.1):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.8.0)"
-  - GoogleUtilities/Reachability (7.8.0):
+  - "GoogleUtilities/NSData+zlib (7.11.1)"
+  - GoogleUtilities/Reachability (7.11.1):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (7.8.0):
+  - GoogleUtilities/UserDefaults (7.11.1):
     - GoogleUtilities/Logger
   - "gRPC-C++ (1.44.0)":
     - "gRPC-C++/Implementation (= 1.44.0)"
@@ -761,13 +763,13 @@ PODS:
     - gRPC-Core/Interface (= 1.44.0)
     - Libuv-gRPC (= 0.0.10)
   - gRPC-Core/Interface (1.44.0)
-  - GTMAppAuth (1.3.1):
+  - GTMAppAuth (2.0.0):
     - AppAuth/Core (~> 1.6)
-    - GTMSessionFetcher/Core (< 3.0, >= 1.5)
-  - GTMSessionFetcher/Core (2.2.0)
+    - GTMSessionFetcher/Core (< 4.0, >= 1.5)
+  - GTMSessionFetcher/Core (3.1.1)
   - Ji (5.0.0)
-  - Kingfisher (7.4.1)
-  - leveldb-library (1.22.1)
+  - Kingfisher (7.6.2)
+  - leveldb-library (1.22.2)
   - Libuv-gRPC (0.0.10):
     - Libuv-gRPC/Implementation (= 0.0.10)
     - Libuv-gRPC/Interface (= 0.0.10)
@@ -779,11 +781,11 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - PromisesObjC (2.1.1)
+  - PromisesObjC (2.2.0)
   - ReadabilityKit (0.7.4):
     - Ji (= 5.0.0)
   - SafeAreaBrush (1.0.4)
-  - SwiftSoup (2.4.3)
+  - SwiftSoup (2.5.3)
   - Untagger (0.0.4)
 
 DEPENDENCIES:
@@ -792,6 +794,7 @@ DEPENDENCIES:
   - DropDown
   - FirebaseAnalytics
   - FirebaseAuth
+  - FirebaseCore
   - FirebaseFirestore
   - FirebaseFirestoreSwift
   - GoogleSignIn
@@ -810,6 +813,7 @@ SPEC REPOS:
     - BoringSSL-GRPC
     - DropDown
     - FirebaseAnalytics
+    - FirebaseAppCheckInterop
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreExtension
@@ -838,38 +842,39 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
-  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   AlamofireRSSParser: c8aeb615ac194d45e6648c121bbb442d16aaa4dc
-  AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
+  AppAuth: e48b432bb4ba88b10cb2bcc50d7f3af21e78b9c2
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
-  FirebaseAnalytics: 24cb27b52b2e11ad5013528195b4ca0755dec960
-  FirebaseAuth: 19a85b8a42e7c1104a2ffa6987c748daa79a5e64
-  FirebaseCore: 55e7ae35991ccca4db03ff8d8df6ed5f17a3e4c7
-  FirebaseCoreExtension: 93d252fabdc9696bf14a73b04d84877ab9b3a832
-  FirebaseCoreInternal: 96d75228e10fd369564da51bd898414eb0f54df5
-  FirebaseFirestore: 244f71ff14ef44f39e00b44d356eac708ce03103
-  FirebaseFirestoreSwift: 55098402529ce59ba54a2ce1ad5798ae1ba563ef
-  FirebaseInstallations: 99d24bac0243cf8b0e96cf5426340d211f0bcc80
-  FirebaseSharedSwift: d82ad66b3f8de9dda19c77b9627cbcaad71e245e
-  GoogleAppMeasurement: e490e248af3da95afe8fa8e7baac232dc8d020b7
-  GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
-  GoogleUtilities: 1d20a6ad97ef46f67bbdec158ce00563a671ebb7
+  FirebaseAnalytics: e1fc758bd5d71823bba970c076abee4b2450a5f4
+  FirebaseAppCheckInterop: 8e907eea79958960a8bd2058e067f31e03a7914b
+  FirebaseAuth: 28e6fff787467cd15ab51c8c7aa904003b2f57aa
+  FirebaseCore: e78636a990b54be427ce300aa09a0e359f4e0e87
+  FirebaseCoreExtension: d815fd6fec8bb3a0940bc02dd5e3e641ea7229d8
+  FirebaseCoreInternal: fa2899eb1f340054858d289e5a0fb935a0a74e52
+  FirebaseFirestore: 45b8ac2def7e9b6c4c10c09521b1e0b410d211fc
+  FirebaseFirestoreSwift: d607f5e8a206640ffd2573f99e9830b80ab7d1c0
+  FirebaseInstallations: b2a05a3fe707df764345d68685534d07d0664af3
+  FirebaseSharedSwift: e9e23efae965af553a8d1524efa3f64b5ef7ef0a
+  GoogleAppMeasurement: 0ba93018e916f7badf915c2337d43cc1fa96b3f9
+  GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
+  GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
-  GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
-  GTMSessionFetcher: d62ffccea5108bb9e7762ee121ae63bbdd2c6303
+  GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
+  GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   Ji: d795fed288fe78658b404c88946d753b17d8d7f4
-  Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
-  leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
+  leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   ReadabilityKit: 09e8b2ecb3d06f17f4c856e426c34f9016e86e6f
   SafeAreaBrush: 282315ce500e436c04b2c26b46e8ac0ad4288bbd
-  SwiftSoup: 3384f2e618cfc1b3cbc7852c16692fe8de13fb8f
+  SwiftSoup: 33e8d374021a6c332788f78fa29a93227d8a7699
   Untagger: 37cd7483949e7abe21630bda4474013fc0d8174f
 
-PODFILE CHECKSUM: c437aebd2badcde9868d2e1cd0b294c47327bbe4
+PODFILE CHECKSUM: 4adaf67bdb3c63120eba8f21035d850361470994
 
 COCOAPODS: 1.11.3
